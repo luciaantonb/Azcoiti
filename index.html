@@ -1,9 +1,281 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>My Website</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        font-family: "Inter Tight", sans-serif;
+      }
+
+      /* ── Page wrapper: full viewport, no scroll ── */
+      .home {
+        width: 100%;
+        height: 100vh;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* ── Header ── */
+      header {
+        position: relative;
+        height: clamp(72px, 13.5vh, 110px);
+        flex-shrink: 0;
+      }
+
+      .logo {
+        height: 22px;
+        width: auto;
+        position: absolute;
+        left: clamp(12px, 1.6vw, 21px);
+        top: 22px;
+        object-fit: contain;
+        cursor: pointer;
+      }
+
+      .nav-item {
+        position: absolute;
+        color: rgba(0, 0, 0, 1);
+        font-size: clamp(13px, 1.1vw, 16px);
+        font-family: "Inter Tight", sans-serif;
+        font-weight: 500;
+        line-height: 1.2;
+        text-transform: capitalize;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+        transition: opacity 0.2s ease;
+        white-space: nowrap;
+      }
+      .nav-item:hover {
+        opacity: 0.7;
+      }
+
+      .nav-pattern {
+        top: 22px;
+        left: clamp(160px, 20.5vw, 263px);
+      }
+      .nav-generator {
+        top: 22px;
+        left: clamp(400px, 54vw, 692px);
+      }
+      .nav-artwork {
+        top: 44px;
+        left: clamp(400px, 54vw, 693px);
+      }
+      .nav-about {
+        top: 63px;
+        left: clamp(400px, 54vw, 693px);
+      }
+
+      .profile-btn {
+        width: 27px;
+        height: 27px;
+        position: absolute;
+        right: clamp(12px, 3.7vw, 47px);
+        top: 23px;
+        border: none;
+        background: none;
+        padding: 0;
+        cursor: pointer;
+      }
+      .profile-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ── Tile grid ── */
+      main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        width: 100%;
+        min-height: 0;
+      }
+
+      .tile {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        cursor: pointer;
+        transition: filter 0.3s ease;
+        overflow: hidden;
+        min-height: 0;
+      }
+      .tile:hover {
+        filter: brightness(1.05);
+        z-index: 10;
+      }
+
+      .tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .tile-text {
+        color: rgba(0, 0, 0, 1);
+        font-size: clamp(14px, 1.4vw, 20px);
+        font-family: "MD Lorien Trial", Georgia, serif;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        text-align: center;
+        pointer-events: none;
+        z-index: 2;
+        width: 70%;
+        padding-top: clamp(16px, 4%, 30px);
+      }
+
+      /* ── Tile colours ── */
+      #tile-1 {
+        background-color: rgba(254, 69, 12, 1);
+      }
+      #tile-3 {
+        background-color: rgba(192, 190, 169, 1);
+      }
+      #tile-5 {
+        background-color: rgba(55, 172, 251, 1);
+      }
+      #tile-6 {
+        background-color: rgba(158, 11, 11, 1);
+      }
+      #tile-7 {
+        background-color: rgba(68, 142, 122, 1);
+      }
+      #tile-8 {
+        background-color: rgba(229, 196, 230, 1);
+      }
+      #tile-10 {
+        background-color: rgba(208, 255, 113, 1);
+      }
+      #tile-12 {
+        background-color: rgba(255, 135, 229, 1);
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello 👋</h1>
+    <div class="home">
+      <!-- ── Header ── -->
+      <header>
+        <img
+          class="logo"
+          src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+          alt="Main Logo"
+        />
+
+        <button class="nav-item nav-pattern" aria-label="Pattern Creation">
+          Pattern Creation
+        </button>
+        <button class="nav-item nav-generator" aria-label="Generator">
+          Generator
+        </button>
+        <button class="nav-item nav-artwork" aria-label="Artwork">
+          Artwork
+        </button>
+        <button class="nav-item nav-about" aria-label="About">About</button>
+
+        <button class="profile-btn" aria-label="Profile">
+          <img
+            src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/2031a32f-264b-4582-ac57-941428d2911b.png"
+            alt="Profile"
+          />
+        </button>
+      </header>
+
+      <!-- ── Tiles ── -->
+      <main>
+        <!-- Row 1 -->
+        <div class="tile" id="tile-1">
+          <span class="tile-text">A tool to help you slow down</span>
+        </div>
+
+        <div class="tile" id="tile-2">
+          <img
+            src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/a196fe84-2564-481e-9a1c-d61338e47413.svg"
+            alt="Pattern graphic"
+          />
+        </div>
+
+        <div class="tile" id="tile-3">
+          <span class="tile-text">Turn Data Into Patterns</span>
+        </div>
+
+        <div class="tile" id="tile-4">
+          <img
+            src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/1b63b924-b0aa-4ea1-afd3-ffa4be22c469.svg"
+            alt="Pattern graphic"
+          />
+        </div>
+
+        <div class="tile" id="tile-5">
+          <span class="tile-text">Information, woven</span>
+        </div>
+
+        <div class="tile" id="tile-6">
+          <span class="tile-text"
+            >The world rewards speed. We reward attention.</span
+          >
+        </div>
+
+        <!-- Row 2 -->
+        <div class="tile" id="tile-7">
+          <span class="tile-text">Made to matter</span>
+        </div>
+
+        <div class="tile" id="tile-8">
+          <span class="tile-text">Binary logic transformed</span>
+        </div>
+
+        <div class="tile" id="tile-9">
+          <img
+            src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/f6050f16-2312-471c-b1cd-2f7032070f66.svg"
+            alt="Pattern graphic"
+          />
+        </div>
+
+        <div class="tile" id="tile-10">
+          <span class="tile-text"
+            >When did your clothes stop meaning something?</span
+          >
+        </div>
+
+        <div class="tile" id="tile-11">
+          <img
+            src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/728f137e-adce-43ef-b91d-7f89cdf71c99.svg"
+            alt="Pattern graphic"
+          />
+        </div>
+
+        <div class="tile" id="tile-12">
+          <span class="tile-text">Reason before form</span>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
