@@ -1,128 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generational Transmission — Azcoiti</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/nav.css" />
-  <link rel="stylesheet" href="../css/artwork-page.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generational Transmission — Azcoiti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/artwork-page.css" />
+  </head>
+  <body>
+    <!-- ── HEADER ── -->
+    <header>
+      <img
+        class="logo"
+        src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+        alt="Azcoiti"
+        onclick="window.location.href = '../index.html'"
+      />
+      <span class="nav-tagline">Pattern Creation</span>
+      <nav class="nav-links">
+        <button
+          class="nav-link"
+          onclick="window.location.href = '../generator.html'"
+        >
+          Generator
+        </button>
+        <button
+          class="nav-link active"
+          onclick="window.location.href = 'artwork.html'"
+        >
+          Artwork
+        </button>
+        <button
+          class="nav-link"
+          onclick="window.location.href = '../about.html'"
+        >
+          About
+        </button>
+      </nav>
+      <button class="nav-icon" aria-label="Profile">
+        <img
+          src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/2031a32f-264b-4582-ac57-941428d2911b.png"
+          alt="Profile"
+        />
+      </button>
+    </header>
 
-<!-- ── HEADER ── -->
-<header>
-  <img class="logo"
-    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
-    alt="Azcoiti" onclick="window.location.href='../index.html'" />
-  <span class="nav-tagline">Pattern Creation</span>
-  <nav class="nav-links">
-    <button class="nav-link" onclick="window.location.href='../generator.html'">Generator</button>
-    <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
-    <button class="nav-link" onclick="window.location.href='../about.html'">About</button>
-  </nav>
-  <button class="nav-icon" aria-label="Profile">
-    <img src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/2031a32f-264b-4582-ac57-941428d2911b.png" alt="Profile" />
-  </button>
-</header>
+    <div class="page">
+      <!-- HERO — full viewport, titles centered, metadata bottom-right -->
+      <section class="hero">
+        <div class="hero-left">
+          <h1 class="hero-title">Generational<br />Transmission</h1>
+        </div>
+        <div class="hero-right">
+          <div class="hero-right-top">
+            <h2 class="hero-subtitle">Passed down, not<br />thrown away</h2>
+          </div>
+          <div class="meta-block">
+            <span>Data visualization</span>
+            <span>Digital print on silk scarf</span>
+            <span>2026</span>
+          </div>
+        </div>
+      </section>
 
-<div class="page">
+      <!-- HERO IMAGE (replace with video when ready) -->
+      <img
+        class="hero-image"
+        src="../images/Generational5.png"
+        alt="Generational Transmission pattern"
+      />
 
-  <!-- HERO — full viewport, titles centered, metadata bottom-right -->
-  <section class="hero">
-    <div class="hero-left">
-      <h1 class="hero-title">Generational<br>Transmission</h1>
+      <!-- INFO -->
+      <section class="info">
+        <div class="section-label">Info</div>
+        <div class="info-col">
+          <p>
+            Not all clothing gets discarded. Some of it stays: passed down
+            through families, kept for decades, repaired rather than replaced.
+            This piece is about those garments, and the relationships people
+            form with them over time.
+          </p>
+          <p>
+            Research into long-term wearer–clothing relationships found that 85%
+            of people reported satisfaction with the garments they had kept for
+            years, through damage, repair, and visible wear. The reasons were
+            rarely practical. Emotional value accounted for nearly a quarter of
+            all longevity factors: memory, inheritance, belonging, love.
+          </p>
+        </div>
+        <div class="info-col">
+          <p>
+            These are not fashion objects. They are something older and more
+            durable than fashion. Garments that accumulated meaning precisely
+            because they were not replaced.
+          </p>
+          <p>
+            Where the other artworks in this series map acceleration,
+            fragmentation, and excess, this one maps the opposite: continuity,
+            attachment, and the slow logic of things that are made to last and
+            kept because they matter.
+          </p>
+        </div>
+      </section>
+
+      <!-- GALLERY ROW -->
+      <section class="gallery-row">
+        <img
+          src="../images/Generational1.png"
+          alt="Scarf hanging on wooden door"
+        />
+        <img src="../images/Generational2.png" alt="Flat scarf pattern" />
+        <img
+          src="../images/Generational3.png"
+          alt="Model wearing scarf as headscarf"
+        />
+      </section>
+
+      <!-- PARAMETERS -->
+      <section class="params">
+        <div class="section-label">Parameters</div>
+        <div class="params-table">
+          <div class="param-row">
+            <span class="param-name">Rhythm</span>
+            <span class="param-value">3</span>
+            <span class="param-desc"
+              >Three generations: grandmother, mother, daughter. The number of
+              times this garment was passed down.</span
+            >
+          </div>
+          <div class="param-row">
+            <span class="param-name">Direction</span>
+            <span class="param-value">0.25</span>
+            <span class="param-desc"
+              >25.3% of respondents cited natural fibres as their reason for
+              keeping a garment. The direction of the pattern leans toward
+              preservation.</span
+            >
+          </div>
+          <div class="param-row">
+            <span class="param-name">Variation</span>
+            <span class="param-value">0.15</span>
+            <span class="param-desc"
+              >Very low variation. The garment remains recognisable across time.
+              It changes hands but not form.</span
+            >
+          </div>
+          <div class="param-row">
+            <span class="param-name">Folds</span>
+            <span class="param-value">3</span>
+            <span class="param-desc"
+              >Three owners, three lives. The structure repeats itself three
+              times, just as the garment did.</span
+            >
+          </div>
+          <div class="param-row">
+            <span class="param-name">Rotation</span>
+            <span class="param-value">0</span>
+            <span class="param-desc"
+              >No rotation. The garment does not change orientation, only
+              ownership. It moves forward, not around.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER GALLERY -->
+      <section class="footer-gallery">
+        <img
+          src="../images/Generational4.png"
+          alt="Scarf draped on wooden frame"
+        />
+        <img src="../images/Generational5.png" alt="Pattern flat detail" />
+      </section>
+
+      <!-- NAVIGATION — prev and next -->
+      <div class="artwork-nav">
+        <a href="obsolescence.html" class="prev">
+          <span class="nav-label">Previous Artwork</span>
+          <span class="nav-title">Perceived Obsolescence</span>
+        </a>
+        <a href="identity.html" class="next">
+          <span class="nav-label">Next Artwork</span>
+          <span class="nav-title">Identity and Personality</span>
+        </a>
+      </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-right-top">
-        <h2 class="hero-subtitle">Passed down, not<br>thrown away</h2>
-      </div>
-      <div class="meta-block">
-        <span>Data visualization</span>
-        <span>Digital print on silk scarf</span>
-        <span>2026</span>
-      </div>
-    </div>
-  </section>
 
-  <!-- HERO IMAGE (replace with video when ready) -->
-  <img class="hero-image" src="../images/Generational5.png" alt="Generational Transmission pattern" />
-
-  <!-- INFO -->
-  <section class="info">
-    <div class="section-label">Info</div>
-    <div class="info-col">
-      <p>Not all clothing gets discarded. Some of it stays: passed down through families, kept for decades, repaired rather than replaced. This piece is about those garments, and the relationships people form with them over time.</p>
-      <p>Research into long-term wearer–clothing relationships found that 85% of people reported satisfaction with the garments they had kept for years, through damage, repair, and visible wear. The reasons were rarely practical. Emotional value accounted for nearly a quarter of all longevity factors: memory, inheritance, belonging, love.</p>
-    </div>
-    <div class="info-col">
-      <p>These are not fashion objects. They are something older and more durable than fashion. Garments that accumulated meaning precisely because they were not replaced.</p>
-      <p>Where the other artworks in this series map acceleration, fragmentation, and excess, this one maps the opposite: continuity, attachment, and the slow logic of things that are made to last and kept because they matter.</p>
-    </div>
-  </section>
-
-  <!-- GALLERY ROW -->
-  <section class="gallery-row">
-    <img src="../images/Generational1.png" alt="Scarf hanging on wooden door" />
-    <img src="../images/Generational2.png" alt="Flat scarf pattern" />
-    <img src="../images/Generational3.png" alt="Model wearing scarf as headscarf" />
-  </section>
-
-  <!-- PARAMETERS -->
-  <section class="params">
-    <div class="section-label">Parameters</div>
-    <div class="params-table">
-      <div class="param-row">
-        <span class="param-name">Rhythm</span>
-        <span class="param-value">3</span>
-        <span class="param-desc">Three generations: grandmother, mother, daughter. The number of times this garment was passed down.</span>
-      </div>
-      <div class="param-row">
-        <span class="param-name">Direction</span>
-        <span class="param-value">0.25</span>
-        <span class="param-desc">25.3% of respondents cited natural fibres as their reason for keeping a garment. The direction of the pattern leans toward preservation.</span>
-      </div>
-      <div class="param-row">
-        <span class="param-name">Variation</span>
-        <span class="param-value">0.15</span>
-        <span class="param-desc">Very low variation. The garment remains recognisable across time. It changes hands but not form.</span>
-      </div>
-      <div class="param-row">
-        <span class="param-name">Folds</span>
-        <span class="param-value">3</span>
-        <span class="param-desc">Three owners, three lives. The structure repeats itself three times, just as the garment did.</span>
-      </div>
-      <div class="param-row">
-        <span class="param-name">Rotation</span>
-        <span class="param-value">0</span>
-        <span class="param-desc">No rotation. The garment does not change orientation, only ownership. It moves forward, not around.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER GALLERY -->
-  <section class="footer-gallery">
-    <img src="../images/Generational4.png" alt="Scarf draped on wooden frame" />
-    <img src="../images/Generational5.png" alt="Pattern flat detail" />
-  </section>
-
-  <!-- NAVIGATION — prev and next -->
-  <div class="artwork-nav">
-    <a href="obsolescence.html" class="prev">
-      <span class="nav-label">Previous Artwork</span>
-      <span class="nav-title">Perceived Obsolescence</span>
-    </a>
-    <a href="artwork.html" class="next">
-      <span class="nav-label">Next Artwork</span>
-      <span class="nav-title">Identity and Personality</span>
-    </a>
-  </div>
-
-</div>
-
-<footer class="page-footer">© 2026 AZCOITI</footer>
-
-</body>
+    <footer class="page-footer">© 2026 AZCOITI</footer>
+  </body>
 </html>
