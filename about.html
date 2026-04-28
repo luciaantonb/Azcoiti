@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Azcoiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css" />
+  <style>
+    @font-face {
+      font-family: 'MDLorien';
+      src: url('MDLorien-Regular.otf') format('opentype');
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      background: #fff;
+      font-family: 'Inter Tight', sans-serif;
+      color: #000;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER via nav.css ── */
+
+    /* ── PAGE SHELL ── */
+    .page {
+      padding-top: 90px;   /* clear fixed header */
+    }
+
+    /* inner gutter — tight, like the reference */
+    .inner {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* ── HERO ── 
+       We want the text block to sit near the bottom of the first
+       viewport. We use min-height: calc(100vh - 80px) on the hero
+       section and push text to the bottom with flex.
+    */
+    .hero {
+      min-height: calc(100vh - 90px);
+      display: flex;
+      align-items: flex-end;   /* text anchored to bottom */
+      padding-bottom: 48px;
+    }
+
+    .hero h1 {
+      /* Nearly full width — match reference */
+      width: 100%;
+      font-size: clamp(36px, 4.7vw, 62px);
+      font-family: 'MDLorien', Georgia, serif;
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: #000;
+      /* First-line indent matching reference */
+      text-indent: clamp(60px, 10vw, 180px);
+    }
+
+    /* ── ABOUT GRID ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      column-gap: 24px;
+      /* tall enough to fill viewport so word section isn't visible */
+      min-height: calc(100vh - 90px);
+      padding-top: 56px;
+      padding-bottom: 160px; /* lots of space before next section */
+      border-top: none;
+    }
+
+    .about-label {
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Inter Tight', sans-serif;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    .about-col {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .about-block h3 {
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Inter Tight', sans-serif;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .about-block p {
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Inter Tight', sans-serif;
+      line-height: 1.55;
+      color: #111;
+    }
+
+    /* ── WORD LIST ── */
+    .word-section {
+      border-top: none;
+      padding-top: 80px;
+      padding-bottom: 120px;
+    }
+
+    /* Center the whole block horizontally */
+    .word-layout {
+      display: flex;
+      align-items: center; /* vertically center "Azcoiti is" against word list */
+      justify-content: center;
+      gap: 0.22em;
+    }
+
+    .word-static {
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-family: 'MDLorien', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      color: #000;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      /* shift down so it aligns with "Pattern" (5th of 9 items = ~55% down the list) */
+      /* each item is line-height 1.25 * font-size; offset = 4 items from top */
+      margin-top: calc(4 * 1.25 * clamp(40px, 5.5vw, 72px));
+      align-self: flex-start;
+    }
+
+    .word-list {
+      list-style: none;
+      padding: 0; margin: 0;
+    }
+
+    .word-list li {
+      line-height: 1;
+    }
+
+    .word-list button {
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-family: 'MDLorien', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      /* full opacity by default; dim on list hover via JS */
+      color: #000;
+      opacity: 0.25;
+      transition: opacity 0.2s ease;
+      display: block;
+      text-align: left;
+    }
+    /* when list is hovered, hovered item goes full, rest stay dim */
+    .word-list.hovered button { opacity: 0.25; }
+    .word-list.hovered button:hover { opacity: 1; }
+    /* default highlight (Pattern) */
+    .word-list button.active { opacity: 1; }
+    .word-list button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: right;
+      padding: 16px 20px 24px;
+      font-size: 11px;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .page { padding-top: 60px; }
+      .hero { min-height: calc(100vh - 60px); padding-top: 40px; padding-bottom: 40px; }
+      .hero h1 { font-size: clamp(28px, 5.5vw, 48px); text-indent: 40px; }
+      .about-grid { grid-template-columns: 120px 1fr 1fr; column-gap: 16px; padding-top: 40px; padding-bottom: 60px; }
+      .word-static,
+      .word-list button { font-size: clamp(32px, 5.5vw, 56px); }
+      .word-static { margin-top: calc(4 * 1.25 * clamp(32px, 5.5vw, 56px)); }
+    }
+    @media (max-width: 480px) {
+      .page { padding-top: 52px; }
+      .hero { min-height: calc(100vh - 52px); }
+      .hero h1 { font-size: clamp(24px, 7vw, 36px); text-indent: 24px; }
+      /* About grid: stack label above, cols below */
+      .about-grid { grid-template-columns: 1fr 1fr; padding-top: 32px; padding-bottom: 40px; }
+      .about-label { grid-column: 1 / -1; margin-bottom: 20px; }
+      .about-block h3 { font-size: 13px; }
+      .about-block p { font-size: 13px; }
+      /* Word list: left aligned, smaller */
+      .word-section { padding-top: 48px; }
+      .word-layout { justify-content: flex-start; padding-left: 14px; gap: 0.15em; }
+      .word-static,
+      .word-list button { font-size: clamp(28px, 8vw, 44px); }
+      .word-static { margin-top: calc(4 * 1.25 * clamp(28px, 8vw, 44px)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <img class="logo"
+    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+    alt="Azcoiti" onclick="window.location.href='index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link active" onclick="window.location.href='about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+  </button>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+</header>
+
+<!-- ── PAGE ── -->
+<div class="page">
+  <div class="inner">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Azcoiti is a generative system that translates data into woven textile patterns. Numbers become structure. Structure becomes fabric.</h1>
+    </section>
+
+    <!-- ABOUT GRID -->
+    <section class="about-grid">
+      <div class="about-label">About</div>
+
+      <div class="about-col">
+        <div class="about-block">
+          <h3>Why</h3>
+          <p>The fashion industry produces numbers that are difficult to feel. Millions of tonnes of waste, trend cycles that once lasted decades now lasting weeks. The scale makes them abstract, and abstraction makes them easy to ignore. This project is an attempt to make that data material.</p>
+        </div>
+        <div class="about-block">
+          <h3>How</h3>
+          <p>It was built on weave draft logic, the same mathematics used to program a loom. A dataset becomes a weave draft. Numbers become the density, direction, and variation of a textile surface. Each artwork is then produced as a physical object, because to understand the data it should be something you can touch.</p>
+        </div>
+      </div>
+
+      <div class="about-col">
+        <div class="about-block">
+          <h3>What</h3>
+          <p>Azcoiti is a generative system that translates any dataset into woven textile patterns, where every visual property is determined by a real number. The tool is open to anyone. The five artworks here apply it to fast fashion research, not because it is the only valid subject, but because it is the one that made this project feel necessary.</p>
+        </div>
+        <div class="about-block">
+          <h3>Which</h3>
+          <p>Of all the elements in a garment, pattern is the only one with no structural purpose. It exists purely to express something. It is the most human part of fashion, the part that has nothing to do with function and everything to do with meaning. Encoding data into pattern felt like the most honest translation: asking decoration to carry weight again.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORD LIST -->
+    <section class="word-section">
+      <div class="word-layout">
+        <!-- Static "Azcoiti is" — never moves, never animates -->
+        <span class="word-static">Azcoiti is</span>
+
+        <!-- Word list — left aligned, opacity varies on hover -->
+        <ul class="word-list" id="wordList">
+          <li><button class="">History</button></li>
+          <li><button class="">Connection</button></li>
+          <li><button class="">Emotion</button></li>
+          <li><button class="">Language</button></li>
+          <li><button class="active">Pattern</button></li>
+          <li><button class="">Data</button></li>
+          <li><button class="">Numbers</button></li>
+          <li><button class="">Weave</button></li>
+          <li><button class="">Archive</button></li>
+        </ul>
+      </div>
+    </section>
+
+  </div><!-- /.inner -->
+</div><!-- /.page -->
+
+<footer>© 2026 AZCOITI</footer>
+
+<script>
+  const list = document.getElementById('wordList');
+  const btns = list.querySelectorAll('button');
+  const defaultBtn = list.querySelector('button.active');
+
+  // On list hover: add .hovered so CSS dims all, then each button:hover overrides to full
+  list.addEventListener('mouseenter', () => {
+    list.classList.add('hovered');
+    // Remove active so default doesn't stay bright while hovering others
+    btns.forEach(b => b.classList.remove('active'));
+  });
+
+  list.addEventListener('mouseleave', () => {
+    list.classList.remove('hovered');
+    // Restore default active
+    defaultBtn.classList.add('active');
+  });
+</script>
+
+</body>
+</html>

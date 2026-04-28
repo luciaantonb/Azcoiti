@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nav.css">
 <style>
 @font-face {
   font-family: 'MDLorien';
@@ -18,7 +19,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --header-h: 110px;
+  --header-h: 90px;
   --side-w: 220px;
   --border: rgba(0,0,0,0.08);
   --fg: #111;
@@ -28,70 +29,143 @@
 
 html, body {
   height: 100%;
-  overflow: hidden;
   font-family: 'Inter Tight', sans-serif;
   background: var(--bg);
+  overflow: hidden;
 }
 
-/* ── HEADER (matches home page) ── */
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  background: #fff;
-  z-index: 200;
-  border-bottom: 1px solid var(--border);
+/* ── HEADER via nav.css ── */
+/* ── RESPONSIVE — tablet & mobile ── */
+@media (max-width: 768px) {
+  /* Canvas fills full screen below header, sidebar hidden — opened via button */
+  :root { --header-h: 60px; }
+
+  #layout {
+    grid-template-columns: 1fr !important;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+  }
+
+  /* Hide desktop sidebar */
+  aside { display: none !important; }
+
+  /* Canvas fills everything */
+  main { position: relative; }
+
+  /* ── Mobile action buttons — fixed over canvas ── */
+  .mobile-actions {
+    display: flex !important;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
+    z-index: 150;
+  }
+
+  .mob-btn {
+    font-size: 14px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .mob-btn-primary  { background: #111; color: #fff; }
+  .mob-btn-primary:hover { opacity: 0.8; }
+  .mob-btn-secondary { background: #fff; color: #111; border: 1px solid rgba(0,0,0,0.2); }
+
+  /* ── Settings overlay ── */
+  .mob-settings-btn {
+    display: flex !important;
+    position: fixed;
+    top: 68px;
+    right: 16px;
+    z-index: 150;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 2px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* The fullscreen overlay panel */
+  #mob-panel {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 300;
+    overflow-y: auto;
+    padding-top: 60px;
+  }
+  #mob-panel.open { display: block; }
+
+  /* Close button inside panel */
+  #mob-panel-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 310;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #111;
+    line-height: 1;
+    padding: 8px;
+  }
+
+  /* Bigger touch targets inside panel */
+  #mob-panel .acc-hd {
+    padding: 18px 20px;
+    font-size: 15px;
+  }
+  #mob-panel .acc-body {
+    padding: 8px 20px 24px;
+  }
+  #mob-panel .p-row { padding: 14px 0 0; }
+  #mob-panel .p-name { font-size: 14px; }
+  #mob-panel .p-val  { font-size: 14px; }
+  #mob-panel input[type=range] { height: 2px; margin: 14px 0 16px; }
+  #mob-panel input[type=range]::-webkit-slider-thumb { width: 18px; height: 18px; }
+  #mob-panel .tog {
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: 2px;
+  }
+  #mob-panel .pal {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+  #mob-panel .color-row { height: 40px; }
+  #mob-panel input[type=color].swatch { width: 30px; height: 26px; }
+  #mob-panel .hex-input { font-size: 13px; }
 }
 
-.logo {
-  height: 22px;
-  width: auto;
-  position: absolute;
-  left: 21px;
-  top: 22px;
-  object-fit: contain;
-  cursor: pointer;
+@media (max-width: 480px) {
+  :root { --header-h: 80px; }
+  #layout { height: calc(100vh - 80px); margin-top: 80px; }
+  .mob-settings-btn { top: 88px; }
 }
-
-.nav-item {
-  position: absolute;
-  color: #111;
-  font-size: 16px;
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 500;
-  line-height: 1.2;
-  text-transform: capitalize;
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
-}
-.nav-item:hover { opacity: 1; }
-.nav-item.active { opacity: 1; }
-.nav-item.dim { opacity: 0.35; }
-.nav-item.dim:hover { opacity: 1; }
-
-.nav-pattern   { top: 22px; left: clamp(160px, 20.5vw, 263px); }
-.nav-generator { top: 22px; left: clamp(400px, 54vw, 692px); }
-.nav-artwork   { top: 44px; left: clamp(400px, 54vw, 693px); }
-.nav-about     { top: 63px; left: clamp(400px, 54vw, 693px); }
-
-.profile-btn {
-  width: 27px; height: 27px;
-  position: absolute;
-  right: 47px; top: 23px;
-  border: none; background: none; padding: 0; cursor: pointer;
-}
-.profile-btn img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ── BODY LAYOUT ── */
 #layout {
   display: grid;
   grid-template-columns: var(--side-w) 1fr;
-  height: 100vh;
-  padding-top: var(--header-h);
+  height: calc(100vh - 90px);
+  overflow: hidden;
+  margin-top: 90px;
 }
 
 /* ── SIDEBAR ── */
@@ -245,26 +319,42 @@ main { position: relative; overflow: hidden; background: #e8e8e8; min-height: 0;
 </head>
 <body>
 
-<!-- ── HEADER (same as home page) ── -->
+<!-- ── HEADER ── -->
 <header>
-  <img
-    class="logo"
+  <img class="logo"
     src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
-    alt="Main Logo"
-    onclick="window.location.href='index.html'"
-  />
-
-  <button class="nav-item nav-pattern" aria-label="Pattern Creation">Pattern Creation</button>
-  <button class="nav-item nav-generator active" aria-label="Generator">Generator</button>
-  <button class="nav-item nav-artwork dim"   aria-label="Artwork">Artwork</button>
-  <button class="nav-item nav-about dim"     aria-label="About">About</button>
-
-  <button class="profile-btn" aria-label="Profile">
-    <img
-      src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/2031a32f-264b-4582-ac57-941428d2911b.png"
-      alt="Profile"
-    />
+    alt="Azcoiti" onclick="window.location.href='index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link active" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
   </button>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
 </header>
 
 <!-- ── MAIN LAYOUT ── -->
@@ -542,5 +632,134 @@ window.addEventListener('load',()=>{
   document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo();}});
 });
 </script>
+
+
+<!-- ── MOBILE: settings button + fullscreen panel ── -->
+<button class="mob-settings-btn" id="mob-open-btn" style="display:none" onclick="document.getElementById('mob-panel').classList.add('open')">Parameters</button>
+
+<div class="mobile-actions" style="display:none">
+  <button class="mob-btn mob-btn-primary" onclick="rnd()">Randomise</button>
+  <button class="mob-btn mob-btn-secondary" onclick="xpng()">Export</button>
+</div>
+
+<div id="mob-panel">
+  <button id="mob-panel-close" onclick="document.getElementById('mob-panel').classList.remove('open')">✕</button>
+
+  <!-- Mirror of the desktop sidebar content, with same IDs won't work — use classes -->
+  <div style="padding:0 0 40px 0;">
+
+    <div class="acc">
+      <div class="acc-hd" onclick="toggleAcc(this)">Structure
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
+      </div>
+      <div class="acc-body">
+        <div class="p-row"><span class="p-name">Presets</span></div>
+        <div class="pal-grid" style="margin-bottom:4px;">
+          <button class="pal" onclick="lp('plain');closeMob()">plain</button>
+          <button class="pal" onclick="lp('twill');closeMob()">twill</button>
+          <button class="pal" onclick="lp('stripe');closeMob()">stripe</button>
+          <button class="pal" onclick="lp('check');closeMob()">check</button>
+          <button class="pal" onclick="lp('diamond');closeMob()">diamond</button>
+          <button class="pal" onclick="lp('medallion');closeMob()">medallion</button>
+          <button class="pal" onclick="lp('ikat');closeMob()">ikat</button>
+          <button class="pal" onclick="lp('complex');closeMob()">complex</button>
+        </div>
+        <div class="p-row"><span class="p-name">Rhythm</span><span class="p-val" id="mv-rhythm">8</span></div>
+        <input type="range" min="2" max="24" step="1" value="8" oninput="up('rhythm',+this.value);document.getElementById('mv-rhythm').textContent=this.value">
+        <div class="p-row"><span class="p-name">Direction</span><span class="p-val" id="mv-direction">0.50</span></div>
+        <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="up('direction',+this.value);document.getElementById('mv-direction').textContent=(+this.value).toFixed(2)">
+        <div class="p-row"><span class="p-name">Variation</span><span class="p-val" id="mv-variation">0.00</span></div>
+        <input type="range" min="0" max="1" step="0.01" value="0" oninput="up('variation',+this.value);document.getElementById('mv-variation').textContent=(+this.value).toFixed(2)">
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-hd" onclick="toggleAcc(this)">Symmetry
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
+      </div>
+      <div class="acc-body">
+        <div class="p-row"><span class="p-name">Folds</span><span class="p-val" id="mv-folds">0</span></div>
+        <input type="range" min="0" max="4" step="1" value="0" oninput="up('folds',+this.value);document.getElementById('mv-folds').textContent=this.value">
+        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mirror</span></div>
+        <div class="tog-row">
+          <button class="tog" id="mt-mx" onclick="togMirror('mx');this.classList.toggle('on')">horizontal</button>
+          <button class="tog" id="mt-my" onclick="togMirror('my');this.classList.toggle('on')">vertical</button>
+        </div>
+        <div class="p-row"><span class="p-name">Rotation</span><span class="p-val" id="mv-rotation">0</span></div>
+        <input type="range" min="0" max="3" step="1" value="0" oninput="up('rotation',+this.value);document.getElementById('mv-rotation').textContent=this.value">
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-hd" onclick="toggleAcc(this)">Color
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
+      </div>
+      <div class="acc-body">
+        <div class="color-grid">
+          <div class="color-item"><div class="color-row">
+            <input type="color" class="swatch" value="#f0ebe2" oninput="setCol(0,this.value)">
+            <input type="text" class="hex-input" value="F0EBE2" maxlength="7" oninput="onHexInput(0,this.value)">
+          </div></div>
+          <div class="color-item"><div class="color-row">
+            <input type="color" class="swatch" value="#141210" oninput="setCol(1,this.value)">
+            <input type="text" class="hex-input" value="141210" maxlength="7" oninput="onHexInput(1,this.value)">
+          </div></div>
+          <div class="color-item"><div class="color-row">
+            <input type="color" class="swatch" value="#4a8fa8" oninput="setCol(2,this.value)">
+            <input type="text" class="hex-input" value="4A8FA8" maxlength="7" oninput="onHexInput(2,this.value)">
+          </div></div>
+          <div class="color-item"><div class="color-row">
+            <input type="color" class="swatch" value="#c8a84b" oninput="setCol(3,this.value)">
+            <input type="text" class="hex-input" value="C8A84B" maxlength="7" oninput="onHexInput(3,this.value)">
+          </div></div>
+        </div>
+        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mode</span></div>
+        <div class="tog-row">
+          <button class="tog on" data-m="flat"     onclick="setMode('flat')">flat</button>
+          <button class="tog"    data-m="gradient" onclick="setMode('gradient')">gradient</button>
+          <button class="tog"    data-m="weavemix" onclick="setMode('weavemix')">weave</button>
+        </div>
+        <div class="p-row"><span class="p-name">Palette Presets</span></div>
+        <div class="pal-grid">
+          <button class="pal" onclick="setPal('rust');closeMob()">rust</button>
+          <button class="pal" onclick="setPal('ikat');closeMob()">ikat</button>
+          <button class="pal" onclick="setPal('loom');closeMob()">loom</button>
+          <button class="pal" onclick="setPal('forest');closeMob()">forest</button>
+          <button class="pal" onclick="setPal('plaid');closeMob()">plaid</button>
+          <button class="pal" onclick="setPal('chalk');closeMob()">chalk</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-hd" onclick="toggleAcc(this)">Display
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
+      </div>
+      <div class="acc-body">
+        <div class="p-row"><span class="p-name">Grid lines</span><span class="p-val" id="mv-grid">ON</span></div>
+        <input type="range" min="0" max="1" step="1" value="1" oninput="upGrid(+this.value);document.getElementById('mv-grid').textContent=+this.value?'ON':'OFF'">
+        <div class="p-row"><span class="p-name">Animation speed</span><span class="p-val" id="mv-speed">Slow</span></div>
+        <input type="range" min="0" max="3" step="1" value="1" oninput="upSpeed(+this.value);document.getElementById('mv-speed').textContent=['OFF','Slow','Med','Fast'][+this.value]">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function closeMob() { document.getElementById('mob-panel').classList.remove('open'); }
+
+  // Show mobile UI only on small screens
+  function checkMobile() {
+    var isMob = window.innerWidth <= 768;
+    var btn = document.getElementById('mob-open-btn');
+    var acts = document.querySelector('.mobile-actions');
+    if (btn)  btn.style.display  = isMob ? 'block' : 'none';
+    if (acts) acts.style.display = isMob ? 'flex'  : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+</script>
+
 </body>
 </html>
