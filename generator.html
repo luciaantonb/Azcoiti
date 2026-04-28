@@ -1,765 +1,2040 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Generator — Azcoiti</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nav.css">
-<style>
-@font-face {
-  font-family: 'MDLorien';
-  src: url('MDLorien-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Generator — Azcoiti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/nav.css" />
+    <style>
+      @font-face {
+        font-family: "MDLorien";
+        src: url("fonts/MDLorien-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-:root {
-  --header-h: 90px;
-  --side-w: 220px;
-  --border: rgba(0,0,0,0.08);
-  --fg: #111;
-  --muted: #999;
-  --bg: #fff;
-}
+      :root {
+        --header-h: 90px;
+        --side-w: 220px;
+        --border: rgba(0, 0, 0, 0.08);
+        --fg: #111;
+        --muted: #999;
+        --bg: #fff;
+      }
 
-html, body {
-  height: 100%;
-  font-family: 'Inter Tight', sans-serif;
-  background: var(--bg);
-  overflow: hidden;
-}
+      html,
+      body {
+        height: 100%;
+        font-family: "Inter Tight", sans-serif;
+        background: var(--bg);
+        overflow: hidden;
+      }
 
-/* ── HEADER via nav.css ── */
-/* ── RESPONSIVE — tablet & mobile ── */
-@media (max-width: 768px) {
-  /* Canvas fills full screen below header, sidebar hidden — opened via button */
-  :root { --header-h: 60px; }
+      /* ── HEADER via nav.css ── */
+      /* ── RESPONSIVE — tablet & mobile ── */
+      @media (max-width: 768px) {
+        /* Canvas fills full screen below header, sidebar hidden — opened via button */
+        :root {
+          --header-h: 60px;
+        }
 
-  #layout {
-    grid-template-columns: 1fr !important;
-    height: calc(100vh - 80px);
-    margin-top: 80px;
-  }
+        #layout {
+          grid-template-columns: 1fr !important;
+          height: calc(100vh - 80px);
+          margin-top: 80px;
+        }
 
-  /* Hide desktop sidebar */
-  aside { display: none !important; }
+        /* Hide desktop sidebar */
+        aside {
+          display: none !important;
+        }
 
-  /* Canvas fills everything */
-  main { position: relative; }
+        /* Canvas fills everything */
+        main {
+          position: relative;
+        }
 
-  /* ── Mobile action buttons — fixed over canvas ── */
-  .mobile-actions {
-    display: flex !important;
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    gap: 10px;
-    z-index: 150;
-  }
+        /* ── Mobile action buttons — fixed over canvas ── */
+        .mobile-actions {
+          display: flex !important;
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          gap: 10px;
+          z-index: 150;
+        }
 
-  .mob-btn {
-    font-size: 14px;
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .mob-btn-primary  { background: #111; color: #fff; }
-  .mob-btn-primary:hover { opacity: 0.8; }
-  .mob-btn-secondary { background: #fff; color: #111; border: 1px solid rgba(0,0,0,0.2); }
+        .mob-btn {
+          font-size: 14px;
+          font-family: "Inter Tight", sans-serif;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          text-transform: capitalize;
+          padding: 14px 28px;
+          border-radius: 2px;
+          border: none;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .mob-btn-primary {
+          background: #111;
+          color: #fff;
+        }
+        .mob-btn-primary:hover {
+          opacity: 0.8;
+        }
+        .mob-btn-secondary {
+          background: #fff;
+          color: #111;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+        }
 
-  /* ── Settings overlay ── */
-  .mob-settings-btn {
-    display: flex !important;
-    position: fixed;
-    top: 68px;
-    right: 16px;
-    z-index: 150;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.12);
-    border-radius: 2px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 500;
-    color: #111;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
+        /* ── Settings overlay ── */
+        .mob-settings-btn {
+          display: flex !important;
+          position: fixed;
+          top: 68px;
+          right: 16px;
+          z-index: 150;
+          background: #fff;
+          border: 1px solid rgba(0, 0, 0, 0.12);
+          border-radius: 2px;
+          padding: 8px 14px;
+          font-size: 13px;
+          font-family: "Inter Tight", sans-serif;
+          font-weight: 500;
+          color: #111;
+          cursor: pointer;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
 
-  /* The fullscreen overlay panel */
-  #mob-panel {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #fff;
-    z-index: 300;
-    overflow-y: auto;
-    padding-top: 60px;
-  }
-  #mob-panel.open { display: block; }
+        /* The fullscreen overlay panel */
+        #mob-panel {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: #fff;
+          z-index: 300;
+          overflow-y: auto;
+          padding-top: 60px;
+        }
+        #mob-panel.open {
+          display: block;
+        }
 
-  /* Close button inside panel */
-  #mob-panel-close {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 310;
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #111;
-    line-height: 1;
-    padding: 8px;
-  }
+        /* Close button inside panel */
+        #mob-panel-close {
+          position: fixed;
+          top: 16px;
+          right: 16px;
+          z-index: 310;
+          background: none;
+          border: none;
+          font-size: 22px;
+          cursor: pointer;
+          color: #111;
+          line-height: 1;
+          padding: 8px;
+        }
 
-  /* Bigger touch targets inside panel */
-  #mob-panel .acc-hd {
-    padding: 18px 20px;
-    font-size: 15px;
-  }
-  #mob-panel .acc-body {
-    padding: 8px 20px 24px;
-  }
-  #mob-panel .p-row { padding: 14px 0 0; }
-  #mob-panel .p-name { font-size: 14px; }
-  #mob-panel .p-val  { font-size: 14px; }
-  #mob-panel input[type=range] { height: 2px; margin: 14px 0 16px; }
-  #mob-panel input[type=range]::-webkit-slider-thumb { width: 18px; height: 18px; }
-  #mob-panel .tog {
-    font-size: 13px;
-    padding: 10px 16px;
-    border-radius: 2px;
-  }
-  #mob-panel .pal {
-    font-size: 13px;
-    padding: 10px 8px;
-  }
-  #mob-panel .color-row { height: 40px; }
-  #mob-panel input[type=color].swatch { width: 30px; height: 26px; }
-  #mob-panel .hex-input { font-size: 13px; }
-}
+        /* Bigger touch targets inside panel */
+        #mob-panel .acc-hd {
+          padding: 18px 20px;
+          font-size: 15px;
+        }
+        #mob-panel .acc-body {
+          padding: 8px 20px 24px;
+        }
+        #mob-panel .p-row {
+          padding: 14px 0 0;
+        }
+        #mob-panel .p-name {
+          font-size: 14px;
+        }
+        #mob-panel .p-val {
+          font-size: 14px;
+        }
+        #mob-panel input[type="range"] {
+          height: 2px;
+          margin: 14px 0 16px;
+        }
+        #mob-panel input[type="range"]::-webkit-slider-thumb {
+          width: 18px;
+          height: 18px;
+        }
+        #mob-panel .tog {
+          font-size: 13px;
+          padding: 10px 16px;
+          border-radius: 2px;
+        }
+        #mob-panel .pal {
+          font-size: 13px;
+          padding: 10px 8px;
+        }
+        #mob-panel .color-row {
+          height: 40px;
+        }
+        #mob-panel input[type="color"].swatch {
+          width: 30px;
+          height: 26px;
+        }
+        #mob-panel .hex-input {
+          font-size: 13px;
+        }
+      }
 
-@media (max-width: 480px) {
-  :root { --header-h: 80px; }
-  #layout { height: calc(100vh - 80px); margin-top: 80px; }
-  .mob-settings-btn { top: 88px; }
-}
+      @media (max-width: 480px) {
+        :root {
+          --header-h: 80px;
+        }
+        #layout {
+          height: calc(100vh - 80px);
+          margin-top: 80px;
+        }
+        .mob-settings-btn {
+          top: 88px;
+        }
+      }
 
-/* ── BODY LAYOUT ── */
-#layout {
-  display: grid;
-  grid-template-columns: var(--side-w) 1fr;
-  height: calc(100vh - 90px);
-  overflow: hidden;
-  margin-top: 90px;
-}
+      /* ── BODY LAYOUT ── */
+      #layout {
+        display: grid;
+        grid-template-columns: var(--side-w) 1fr;
+        height: calc(100vh - 90px);
+        overflow: hidden;
+        margin-top: 90px;
+      }
 
-/* ── SIDEBAR ── */
-aside {
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-}
-aside::-webkit-scrollbar { width: 0; }
+      /* ── SIDEBAR ── */
+      aside {
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+      }
+      aside::-webkit-scrollbar {
+        width: 0;
+      }
 
-/* accordion */
-.acc { border-bottom: 1px solid var(--border); }
-.acc-hd {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 13px 16px;
-  cursor: pointer; user-select: none;
-  font-size: 13px; font-weight: 500;
-  font-family: 'Inter Tight', sans-serif;
-  color: var(--fg);
-  letter-spacing: 0em;
-  text-transform: capitalize;
-}
-.acc-hd svg { width: 10px; height: 10px; min-width: 10px; min-height: 10px; transition: transform 0.2s; flex-shrink: 0; opacity: 0.3; display: block; overflow: visible; }
-.acc.open .acc-hd svg { transform: rotate(180deg); }
-.acc-body { display: none; flex-direction: column; padding: 4px 16px 16px; }
-.acc.open .acc-body { display: flex; }
+      /* accordion */
+      .acc {
+        border-bottom: 1px solid var(--border);
+      }
+      .acc-hd {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px 16px;
+        cursor: pointer;
+        user-select: none;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: "Inter Tight", sans-serif;
+        color: var(--fg);
+        letter-spacing: 0em;
+        text-transform: capitalize;
+      }
+      .acc-hd svg {
+        width: 10px;
+        height: 10px;
+        min-width: 10px;
+        min-height: 10px;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+        opacity: 0.3;
+        display: block;
+        overflow: visible;
+      }
+      .acc.open .acc-hd svg {
+        transform: rotate(180deg);
+      }
+      .acc-body {
+        display: none;
+        flex-direction: column;
+        padding: 4px 16px 16px;
+      }
+      .acc.open .acc-body {
+        display: flex;
+      }
 
-/* param rows */
-.p-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 0; }
-.p-name { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; font-family: 'Inter Tight', sans-serif; }
-.p-val  { font-size: 11px; color: var(--fg); font-variant-numeric: tabular-nums; font-family: 'Inter Tight', sans-serif; }
+      /* param rows */
+      .p-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 10px 0 0;
+      }
+      .p-name {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-family: "Inter Tight", sans-serif;
+      }
+      .p-val {
+        font-size: 11px;
+        color: var(--fg);
+        font-variant-numeric: tabular-nums;
+        font-family: "Inter Tight", sans-serif;
+      }
 
-/* sliders */
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%; height: 1px;
-  background: rgba(0,0,0,0.12);
-  outline: none; cursor: pointer;
-  margin: 8px 0 10px; display: block;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 6px; height: 6px;
-  border-radius: 50%; background: var(--fg); cursor: pointer;
-}
+      /* sliders */
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.12);
+        outline: none;
+        cursor: pointer;
+        margin: 8px 0 10px;
+        display: block;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--fg);
+        cursor: pointer;
+      }
 
-/* toggles — more minimal */
-.tog-row { display: flex; gap: 4px; padding: 6px 0 10px; flex-wrap: wrap; }
-.tog {
-  font-size: 11px;
-  padding: 3px 8px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  border-radius: 2px;
-  transition: all 0.12s;
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
-  background: none; cursor: pointer;
-  letter-spacing: 0.02em;
-}
-.tog:hover { color: var(--fg); border-color: rgba(0,0,0,0.25); }
-.tog.on {
-  color: var(--fg);
-  border-color: rgba(0,0,0,0.4);
-  background: rgba(0,0,0,0.03);
-}
+      /* toggles — more minimal */
+      .tog-row {
+        display: flex;
+        gap: 4px;
+        padding: 6px 0 10px;
+        flex-wrap: wrap;
+      }
+      .tog {
+        font-size: 11px;
+        padding: 3px 8px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 2px;
+        transition: all 0.12s;
+        font-family: "Inter Tight", sans-serif;
+        font-weight: 400;
+        background: none;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+      }
+      .tog:hover {
+        color: var(--fg);
+        border-color: rgba(0, 0, 0, 0.25);
+      }
+      .tog.on {
+        color: var(--fg);
+        border-color: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.03);
+      }
 
-/* preset pills */
-.pal-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 6px 0 10px; }
-.pal {
-  font-size: 11px; padding: 4px 5px;
-  border: 1px solid var(--border);
-  color: var(--muted); border-radius: 2px;
-  transition: all 0.12s; text-align: center;
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
-  background: none; cursor: pointer;
-  letter-spacing: 0.02em;
-}
-.pal:hover { color: var(--fg); border-color: rgba(0,0,0,0.3); }
+      /* preset pills */
+      .pal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4px;
+        padding: 6px 0 10px;
+      }
+      .pal {
+        font-size: 11px;
+        padding: 4px 5px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 2px;
+        transition: all 0.12s;
+        text-align: center;
+        font-family: "Inter Tight", sans-serif;
+        font-weight: 400;
+        background: none;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+      }
+      .pal:hover {
+        color: var(--fg);
+        border-color: rgba(0, 0, 0, 0.3);
+      }
 
-/* color swatches */
-.color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; padding: 8px 0 12px; }
-.color-item { display: flex; flex-direction: column; gap: 3px; }
-.color-row {
-  display: flex; align-items: center; gap: 6px;
-  border: 1px solid var(--border);
-  border-radius: 2px; padding: 2px 6px 2px 2px; height: 26px;
-}
-input[type=color].swatch {
-  -webkit-appearance: none;
-  width: 20px; height: 18px;
-  border: none; background: none;
-  cursor: pointer; padding: 0; flex-shrink: 0; border-radius: 1px;
-}
-input[type=color].swatch::-webkit-color-swatch-wrapper { padding: 0; }
-input[type=color].swatch::-webkit-color-swatch { border: none; border-radius: 1px; }
-.hex-input {
-  font-size: 11px; font-family: 'Inter Tight', sans-serif;
-  border: none; outline: none; width: 100%;
-  color: var(--fg); background: transparent;
-  letter-spacing: 0.04em; text-transform: uppercase;
-}
+      /* color swatches */
+      .color-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        padding: 8px 0 12px;
+      }
+      .color-item {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .color-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: 2px 6px 2px 2px;
+        height: 26px;
+      }
+      input[type="color"].swatch {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 18px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 0;
+        flex-shrink: 0;
+        border-radius: 1px;
+      }
+      input[type="color"].swatch::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      input[type="color"].swatch::-webkit-color-swatch {
+        border: none;
+        border-radius: 1px;
+      }
+      .hex-input {
+        font-size: 11px;
+        font-family: "Inter Tight", sans-serif;
+        border: none;
+        outline: none;
+        width: 100%;
+        color: var(--fg);
+        background: transparent;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
 
-/* ── ACTIONS ── */
-.actions {
-  margin-top: auto;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid var(--border);
-}
-.act {
-  font-size: 16px;
-  font-family: 'MDLorien', Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  text-transform: capitalize;
-  cursor: pointer;
-  border: none;
-  border-radius: 2px;
-  padding: 10px 14px;
-  width: 100%;
-  text-align: center;
-  transition: background 0.15s, color 0.15s, opacity 0.15s;
-}
-.act-primary {
-  background: #111;
-  color: #fff;
-}
-.act-primary:hover { opacity: 0.75; }
-.act-secondary {
-  background: none;
-  color: var(--fg);
-  border: 1px solid rgba(0,0,0,0.15);
-}
-.act-secondary:hover { border-color: rgba(0,0,0,0.4); background: rgba(0,0,0,0.02); }
+      /* ── ACTIONS ── */
+      .actions {
+        margin-top: auto;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-top: 1px solid var(--border);
+      }
+      .act {
+        font-size: 15px;
+        font-family: "Inter Tight", sans-serif;
+        font-weight: 500;
+        letter-spacing: 0;
+        text-transform: capitalize;
+        cursor: pointer;
+        border: none;
+        border-radius: 2px;
+        padding: 10px 14px;
+        width: 100%;
+        text-align: center;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          opacity 0.15s;
+      }
+      .act-primary {
+        background: #111;
+        color: #fff;
+      }
+      .act-primary:hover {
+        opacity: 0.75;
+      }
+      .act-secondary {
+        background: none;
+        color: var(--fg);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+      .act-secondary:hover {
+        border-color: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.02);
+      }
 
-/* ── CANVAS ── */
-main { position: relative; overflow: hidden; background: #e8e8e8; min-height: 0; }
-#cw { width: 100%; height: 100%; position: relative; }
-#cw canvas {
-  display: block; width: 100%; height: 100%;
-  image-rendering: pixelated;
-  position: absolute; inset: 0;
-}
-</style>
-</head>
-<body>
+      /* ── CANVAS ── */
+      main {
+        position: relative;
+        overflow: hidden;
+        background: #e8e8e8;
+        min-height: 0;
+      }
+      #cw {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      #cw canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── HEADER ── -->
+    <header>
+      <img
+        class="logo"
+        src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+        alt="Azcoiti"
+        onclick="window.location.href = 'index.html'"
+      />
+      <span class="nav-tagline">Pattern Creation</span>
+      <nav class="nav-links">
+        <button
+          class="nav-link active"
+          onclick="window.location.href = 'generator.html'"
+        >
+          Generator
+        </button>
+        <button
+          class="nav-link"
+          onclick="window.location.href = 'pages/artwork.html'"
+        >
+          Artwork
+        </button>
+        <button class="nav-link" onclick="window.location.href = 'about.html'">
+          About
+        </button>
+      </nav>
+      <button class="nav-icon" aria-label="Isotype">
+        <img id="isotype-img" src="images/isotipo-04.png" alt="Isotype" />
+      </button>
+      <script>
+        (function () {
+          var imgs = ["images/isotipo-04.png", "images/isotipo-05.png", "images/isotipo-06.png"];
+          var i = 0;
+          setInterval(function () {
+            i = (i + 1) % imgs.length;
+            var el = document.getElementById("isotype-img");
+            if (el) el.src = imgs[i];
+          }, 2000);
+        })();
+      </script>
+    </header>
 
-<!-- ── HEADER ── -->
-<header>
-  <img class="logo"
-    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
-    alt="Azcoiti" onclick="window.location.href='index.html'" />
-  <span class="nav-tagline">Pattern Creation</span>
-  <nav class="nav-links">
-    <button class="nav-link active" onclick="window.location.href='generator.html'">Generator</button>
-    <button class="nav-link" onclick="window.location.href='artwork.html'">Artwork</button>
-    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
-  </nav>
-    <button class="nav-icon" aria-label="Isotype">
-    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
-  </button>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
-</header>
-
-<!-- ── MAIN LAYOUT ── -->
-<div id="layout">
-  <aside>
-
-    <!-- STRUCTURE -->
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">
-        Structure
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row" style="padding-bottom:2px;"><span class="p-name">Presets</span></div>
-        <div class="pal-grid" style="margin-bottom:4px;">
-          <button class="pal" onclick="lp('plain')">plain</button>
-          <button class="pal" onclick="lp('twill')">twill</button>
-          <button class="pal" onclick="lp('stripe')">stripe</button>
-          <button class="pal" onclick="lp('check')">check</button>
-          <button class="pal" onclick="lp('diamond')">diamond</button>
-          <button class="pal" onclick="lp('medallion')">medallion</button>
-          <button class="pal" onclick="lp('ikat')">ikat</button>
-          <button class="pal" onclick="lp('complex')">complex</button>
+    <!-- ── MAIN LAYOUT ── -->
+    <div id="layout">
+      <aside>
+        <!-- STRUCTURE -->
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Structure
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row" style="padding-bottom: 2px">
+              <span class="p-name">Presets</span>
+            </div>
+            <div class="pal-grid" style="margin-bottom: 4px">
+              <button class="pal" onclick="lp('plain')">plain</button>
+              <button class="pal" onclick="lp('twill')">twill</button>
+              <button class="pal" onclick="lp('stripe')">stripe</button>
+              <button class="pal" onclick="lp('check')">check</button>
+              <button class="pal" onclick="lp('diamond')">diamond</button>
+              <button class="pal" onclick="lp('medallion')">medallion</button>
+              <button class="pal" onclick="lp('ikat')">ikat</button>
+              <button class="pal" onclick="lp('complex')">complex</button>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Rhythm</span
+              ><span class="p-val" id="v-rhythm">8</span>
+            </div>
+            <input
+              type="range"
+              id="s-rhythm"
+              min="2"
+              max="24"
+              step="1"
+              value="8"
+              oninput="up('rhythm', +this.value)"
+            />
+            <div class="p-row">
+              <span class="p-name">Direction</span
+              ><span class="p-val" id="v-direction">0.50</span>
+            </div>
+            <input
+              type="range"
+              id="s-direction"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.5"
+              oninput="up('direction', +this.value)"
+            />
+            <div class="p-row">
+              <span class="p-name">Variation</span
+              ><span class="p-val" id="v-variation">0.00</span>
+            </div>
+            <input
+              type="range"
+              id="s-variation"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+              oninput="up('variation', +this.value)"
+            />
+          </div>
         </div>
-        <div class="p-row"><span class="p-name">Rhythm</span><span class="p-val" id="v-rhythm">8</span></div>
-        <input type="range" id="s-rhythm" min="2" max="24" step="1" value="8" oninput="up('rhythm',+this.value)">
-        <div class="p-row"><span class="p-name">Direction</span><span class="p-val" id="v-direction">0.50</span></div>
-        <input type="range" id="s-direction" min="0" max="1" step="0.01" value="0.5" oninput="up('direction',+this.value)">
-        <div class="p-row"><span class="p-name">Variation</span><span class="p-val" id="v-variation">0.00</span></div>
-        <input type="range" id="s-variation" min="0" max="1" step="0.01" value="0" oninput="up('variation',+this.value)">
+
+        <!-- SYMMETRY -->
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Symmetry
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row">
+              <span class="p-name">Folds</span
+              ><span class="p-val" id="v-folds">0</span>
+            </div>
+            <input
+              type="range"
+              id="s-folds"
+              min="0"
+              max="4"
+              step="1"
+              value="0"
+              oninput="up('folds', +this.value)"
+            />
+            <div class="p-row" style="padding-bottom: 0">
+              <span class="p-name">Mirror</span>
+            </div>
+            <div class="tog-row">
+              <button class="tog" id="t-mx" onclick="togMirror('mx')">
+                horizontal
+              </button>
+              <button class="tog" id="t-my" onclick="togMirror('my')">
+                vertical
+              </button>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Rotation</span
+              ><span class="p-val" id="v-rotation">0</span>
+            </div>
+            <input
+              type="range"
+              id="s-rotation"
+              min="0"
+              max="3"
+              step="1"
+              value="0"
+              oninput="up('rotation', +this.value)"
+            />
+          </div>
+        </div>
+
+        <!-- COLOR -->
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Color
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="color-grid">
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    id="cc0"
+                    value="#f0ebe2"
+                    oninput="setCol(0, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    id="hx0"
+                    value="F0EBE2"
+                    maxlength="7"
+                    oninput="onHexInput(0, this.value)"
+                    onblur="syncHexDisplay(0)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    id="cc1"
+                    value="#141210"
+                    oninput="setCol(1, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    id="hx1"
+                    value="141210"
+                    maxlength="7"
+                    oninput="onHexInput(1, this.value)"
+                    onblur="syncHexDisplay(1)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    id="cc2"
+                    value="#4a8fa8"
+                    oninput="setCol(2, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    id="hx2"
+                    value="4A8FA8"
+                    maxlength="7"
+                    oninput="onHexInput(2, this.value)"
+                    onblur="syncHexDisplay(2)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    id="cc3"
+                    value="#c8a84b"
+                    oninput="setCol(3, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    id="hx3"
+                    value="C8A84B"
+                    maxlength="7"
+                    oninput="onHexInput(3, this.value)"
+                    onblur="syncHexDisplay(3)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="p-row" style="padding-bottom: 0">
+              <span class="p-name">Mode</span>
+            </div>
+            <div class="tog-row">
+              <button class="tog on" data-m="flat" onclick="setMode('flat')">
+                flat
+              </button>
+              <button
+                class="tog"
+                data-m="gradient"
+                onclick="setMode('gradient')"
+              >
+                gradient
+              </button>
+              <button
+                class="tog"
+                data-m="weavemix"
+                onclick="setMode('weavemix')"
+              >
+                weave
+              </button>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Gradient</span
+              ><span class="p-val" id="v-gradient">0.00</span>
+            </div>
+            <input
+              type="range"
+              id="s-gradient"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+              oninput="up('gradient', +this.value)"
+            />
+            <div class="p-row">
+              <span class="p-name">Grad. Angle</span
+              ><span class="p-val" id="v-gradangle">0</span>
+            </div>
+            <input
+              type="range"
+              id="s-gradangle"
+              min="0"
+              max="360"
+              step="1"
+              value="0"
+              oninput="up('gradangle', +this.value)"
+            />
+            <div class="p-row" style="padding-bottom: 2px">
+              <span class="p-name">Palette Presets</span>
+            </div>
+            <div class="pal-grid">
+              <button class="pal" onclick="setPal('rust')">rust</button>
+              <button class="pal" onclick="setPal('ikat')">ikat</button>
+              <button class="pal" onclick="setPal('loom')">loom</button>
+              <button class="pal" onclick="setPal('forest')">forest</button>
+              <button class="pal" onclick="setPal('plaid')">plaid</button>
+              <button class="pal" onclick="setPal('chalk')">chalk</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISPLAY -->
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Display
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row">
+              <span class="p-name">Grid lines</span
+              ><span class="p-val" id="v-grid">ON</span>
+            </div>
+            <input
+              type="range"
+              id="s-grid"
+              min="0"
+              max="1"
+              step="1"
+              value="1"
+              oninput="upGrid(+this.value)"
+            />
+            <div class="p-row">
+              <span class="p-name">Animation speed</span
+              ><span class="p-val" id="v-speed">Slow</span>
+            </div>
+            <input
+              type="range"
+              id="s-speed"
+              min="0"
+              max="3"
+              step="1"
+              value="1"
+              oninput="upSpeed(+this.value)"
+            />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="act act-primary" onclick="rnd()">Randomise</button>
+          <button class="act act-secondary" onclick="xpng()">Export PNG</button>
+        </div>
+      </aside>
+
+      <main>
+        <div id="cw"><canvas id="c"></canvas></div>
+      </main>
+    </div>
+
+    <script>
+      // ── Inline pattern engine (pattern.js) ──
+      window.PE = (() => {
+        const T = 64;
+        function sn(x, y, s) {
+          return (
+            (Math.sin(x * 1.4 + s * 6.3) * Math.cos(y * 0.95 + s * 3.7) * 0.5 +
+              Math.cos(x * 2.3 + y * 1.8 + s * 4.1) * 0.3 +
+              Math.sin(x * 0.7 + y * 2.6 + s * 2.9) * 0.2) *
+              0.5 +
+            0.5
+          );
+        }
+        function h2r(h) {
+          return [
+            parseInt(h.slice(1, 3), 16),
+            parseInt(h.slice(3, 5), 16),
+            parseInt(h.slice(5, 7), 16),
+          ];
+        }
+        function lc(a, b, t) {
+          return [
+            Math.round(a[0] + (b[0] - a[0]) * t),
+            Math.round(a[1] + (b[1] - a[1]) * t),
+            Math.round(a[2] + (b[2] - a[2]) * t),
+          ];
+        }
+        function wB(c, r, rh, d) {
+          const rh2 = Math.max(2, rh),
+            cs = Math.floor(c / rh2) % 2,
+            ro = Math.max(1, Math.round(rh2 * d)),
+            rs = Math.floor(r / ro) % 2;
+          if (d < 0.05) return rs;
+          if (d > 0.95) return cs;
+          return (cs + rs) % 2;
+        }
+        function wL(c, r, rh, d) {
+          return wB(c, r, rh, d) * 2 +
+            wB(c, r, Math.max(2, Math.floor(rh / 2)), d * 0.8 + 0.1) >
+            2
+            ? 1
+            : 0;
+        }
+        function buildRaw(rh, d, va, seed) {
+          const raw = new Uint8Array(T * T);
+          for (let r = 0; r < T; r++)
+            for (let c = 0; c < T; c++) {
+              let v = wL(c, r, rh, d);
+              if (va > 0 && sn(c * 0.22, r * 0.22, seed * 1.7 + 3) < va * 0.68)
+                v = 1 - v;
+              raw[r * T + c] = v;
+            }
+          let ones = 0;
+          for (let i = 0; i < T * T; i++) ones += raw[i];
+          if (ones < T * T * 0.1 || ones > T * T * 0.9) {
+            for (let r = 0; r < T; r++)
+              for (let c = 0; c < T; c++)
+                raw[r * T + c] =
+                  (Math.floor(c / Math.max(2, rh)) +
+                    Math.floor(r / Math.max(2, rh))) %
+                  2;
+          }
+          return raw;
+        }
+        function applyFolds(c, r, folds) {
+          let tc = ((c % T) + T) % T,
+            tr = ((r % T) + T) % T;
+          const h = T >> 1,
+            q = T >> 2;
+          if (folds >= 1) {
+            if (tc >= h) tc = T - 1 - tc;
+            if (tr >= h) tr = T - 1 - tr;
+          }
+          if (folds >= 2) {
+            if (tc > tr) {
+              const t = tc;
+              tc = tr;
+              tr = t;
+            }
+          }
+          if (folds >= 3) {
+            tc %= h;
+            tr %= h;
+          }
+          if (folds >= 4) {
+            tc %= q;
+            tr %= q;
+          }
+          return [Math.min(tc, T - 1), Math.min(tr, T - 1)];
+        }
+        function applyMirror(tc, tr, mx, my) {
+          const h = T >> 1;
+          if (mx && tc >= h) tc = T - 1 - tc;
+          if (my && tr >= h) tr = T - 1 - tr;
+          return [tc, tr];
+        }
+        function applyRot(tc, tr, rot) {
+          if (!rot) return [tc, tr];
+          const h = T >> 1;
+          let x = tc,
+            y = tr;
+          if (rot >= 1) {
+            if (y >= h) {
+              x = T - 1 - x;
+              y = T - 1 - y;
+            }
+          }
+          if (rot >= 2) {
+            if (x >= h) x = T - 1 - x;
+          }
+          if (rot >= 3) {
+            x %= h;
+            y %= h;
+            if (x > y) {
+              const t = x;
+              x = y;
+              y = t;
+            }
+          }
+          return [Math.min(x, T - 1), Math.min(y, T - 1)];
+        }
+        let _imgData = null,
+          _imgW = 0,
+          _imgH = 0;
+        function draw(canvas, cfg, seed) {
+          const {
+            W,
+            H,
+            rh = 8,
+            d = 0.5,
+            va = 0,
+            folds = 0,
+            mx = false,
+            my = false,
+            rot = 0,
+            c0 = "#f0ebe2",
+            c1 = "#141210",
+            c2,
+            c3,
+            mode = "flat",
+            gr = 0,
+            ga = 0,
+            grid = true,
+            cell = 8,
+          } = cfg;
+          if (canvas.width !== W || canvas.height !== H) {
+            canvas.width = W;
+            canvas.height = H;
+            _imgData = null;
+          }
+          const ctx = canvas.getContext("2d");
+          if (!_imgData || _imgW !== W || _imgH !== H) {
+            _imgData = ctx.createImageData(W, H);
+            _imgW = W;
+            _imgH = H;
+          }
+          const raw = buildRaw(rh, d, va, seed);
+          const tile = new Uint8Array(T * T);
+          for (let r = 0; r < T; r++)
+            for (let c = 0; c < T; c++) {
+              let [tc, tr] = applyFolds(c, r, folds);
+              [tc, tr] = applyMirror(tc, tr, mx, my);
+              [tc, tr] = applyRot(tc, tr, rot);
+              tile[r * T + c] = raw[tr * T + tc];
+            }
+          const ca = h2r(c0),
+            cb = h2r(c1),
+            cc = c2 ? h2r(c2) : cb,
+            cd = c3 ? h2r(c3) : ca;
+          const gap = grid ? 1 : 0,
+            cSize = Math.max(1, cell - gap),
+            nC = Math.ceil(W / cell) + 2,
+            nR = Math.ceil(H / cell) + 2;
+          let ang = 0,
+            cosA = 0,
+            sinA = 0,
+            cx2 = 0,
+            cy2 = 0,
+            mp = 0;
+          if (gr > 0.01 && (mode === "gradient" || mode === "weavemix")) {
+            ang = (ga * Math.PI) / 180;
+            cosA = Math.cos(ang);
+            sinA = Math.sin(ang);
+            cx2 = W / 2;
+            cy2 = H / 2;
+            mp = Math.sqrt(W * W + H * H) / 2;
+          }
+          const buf = _imgData.data;
+          const [gr0, gg0, gb0] = ca;
+          for (let i = 0; i < buf.length; i += 4) {
+            buf[i] = gr0;
+            buf[i + 1] = gg0;
+            buf[i + 2] = gb0;
+            buf[i + 3] = 255;
+          }
+          for (let row = 0; row < nR; row++) {
+            for (let col = 0; col < nC; col++) {
+              const tr2 = ((row % T) + T) % T,
+                tc2 = ((col % T) + T) % T,
+                ia = tile[tr2 * T + tc2] === 1;
+              let r, g, b;
+              if (mode === "flat") {
+                const cl = ia ? ca : cb;
+                r = cl[0];
+                g = cl[1];
+                b = cl[2];
+              } else if (mode === "gradient") {
+                let gf = 0;
+                if (gr > 0.01) {
+                  const px = col * cell - cx2,
+                    py = row * cell - cy2,
+                    pr = cosA * px + sinA * py;
+                  gf = Math.max(0, Math.min(1, (pr / mp + 1) / 2)) * gr;
+                }
+                const cl = ia ? lc(ca, cc, gf) : lc(cb, cd, gf);
+                r = cl[0];
+                g = cl[1];
+                b = cl[2];
+              } else {
+                const step = Math.max(1, Math.floor(rh / 2)),
+                  colP = Math.floor(tc2 / step) % 2,
+                  rowP = Math.floor(tr2 / step) % 2;
+                let cl = ia ? (colP === 0 ? ca : cc) : rowP === 0 ? cb : cd;
+                if (gr > 0.01) {
+                  const px = col * cell - cx2,
+                    py = row * cell - cy2,
+                    pr = cosA * px + sinA * py,
+                    gf = Math.max(0, Math.min(1, (pr / mp + 1) / 2)) * gr * 0.4;
+                  cl = lc(cl, ia ? cc : cd, gf);
+                }
+                r = cl[0];
+                g = cl[1];
+                b = cl[2];
+              }
+              const x0 = col * cell,
+                y0 = row * cell,
+                x1 = Math.min(x0 + cSize, W),
+                y1 = Math.min(y0 + cSize, H);
+              for (let py = y0; py < y1; py++) {
+                const rowOff = py * W * 4;
+                for (let px = x0; px < x1; px++) {
+                  const i = rowOff + px * 4;
+                  buf[i] = r;
+                  buf[i + 1] = g;
+                  buf[i + 2] = b;
+                  buf[i + 3] = 255;
+                }
+              }
+            }
+          }
+          ctx.putImageData(_imgData, 0, 0);
+        }
+        function once(canvas, cfg) {
+          const p = canvas.parentElement;
+          const W = p ? p.offsetWidth : canvas.width || 300;
+          const H = p ? p.offsetHeight : canvas.height || 300;
+          draw(canvas, { ...cfg, W, H }, cfg.seed || 42);
+        }
+        function live(canvas, cfg, speed = 0.00018) {
+          let s = Math.random() * 100,
+            raf;
+          function tick() {
+            const p = canvas.parentElement;
+            const W = p ? p.offsetWidth : canvas.width || 300;
+            const H = p ? p.offsetHeight : canvas.height || 300;
+            draw(canvas, { ...cfg, W, H }, s);
+            s += speed;
+            raf = requestAnimationFrame(tick);
+          }
+          tick();
+          return () => cancelAnimationFrame(raf);
+        }
+        return { draw, once, live };
+      })();
+
+      // ── App state ──
+      const P = {
+        rhythm: 8,
+        direction: 0.5,
+        variation: 0,
+        folds: 0,
+        mx: false,
+        my: false,
+        rotation: 0,
+        colors: ["#f0ebe2", "#141210", "#4a8fa8", "#c8a84b"],
+        colorMode: "flat",
+        gradient: 0,
+        gradangle: 0,
+        grid: true,
+        speed: 1,
+      };
+
+      const SPEED_MS = [0, 120, 40, 14];
+      const SPEED_INC = [0, 0.00018, 0.00055, 0.0016];
+      const SPEED_LBL = ["OFF", "Slow", "Med", "Fast"];
+
+      const HISTORY = [],
+        MAX_HISTORY = 30;
+      function snapshot() {
+        return JSON.stringify({
+          rhythm: P.rhythm,
+          direction: P.direction,
+          variation: P.variation,
+          folds: P.folds,
+          mx: P.mx,
+          my: P.my,
+          rotation: P.rotation,
+          colors: [...P.colors],
+          colorMode: P.colorMode,
+          gradient: P.gradient,
+          gradangle: P.gradangle,
+          grid: P.grid,
+          speed: P.speed,
+        });
+      }
+      function pushHistory() {
+        const s = snapshot();
+        if (HISTORY.length && HISTORY[HISTORY.length - 1] === s) return;
+        HISTORY.push(s);
+        if (HISTORY.length > MAX_HISTORY) HISTORY.shift();
+      }
+      function undo() {
+        if (!HISTORY.length) return;
+        _applyState(JSON.parse(HISTORY.pop()));
+        markDirty();
+      }
+      function _applyState(s) {
+        [
+          "rhythm",
+          "direction",
+          "variation",
+          "folds",
+          "rotation",
+          "gradient",
+          "gradangle",
+        ].forEach((k) => {
+          if (s[k] === undefined) return;
+          P[k] = s[k];
+          const ve = document.getElementById("v-" + k);
+          if (ve) ve.textContent = fmt(k, s[k]);
+          const sl = document.getElementById("s-" + k);
+          if (sl) sl.value = s[k];
+        });
+        P.mx = s.mx || false;
+        P.my = s.my || false;
+        document.getElementById("t-mx").classList.toggle("on", P.mx);
+        document.getElementById("t-my").classList.toggle("on", P.my);
+        P.colorMode = s.colorMode || "flat";
+        document
+          .querySelectorAll("[data-m]")
+          .forEach((b) =>
+            b.classList.toggle("on", b.dataset.m === P.colorMode),
+          );
+        if (s.colors)
+          s.colors.forEach((c, i) => {
+            P.colors[i] = c;
+            const sw = document.getElementById("cc" + i);
+            if (sw) sw.value = c;
+            const hx = document.getElementById("hx" + i);
+            if (hx) hx.value = c.replace("#", "").toUpperCase();
+          });
+        if (s.grid !== undefined) {
+          P.grid = s.grid;
+          document.getElementById("v-grid").textContent = P.grid ? "ON" : "OFF";
+          document.getElementById("s-grid").value = P.grid ? 1 : 0;
+        }
+      }
+      function fmt(k, v) {
+        if (["direction", "variation", "gradient"].includes(k))
+          return (+v).toFixed(2);
+        return v;
+      }
+      function up(k, v) {
+        pushHistory();
+        P[k] = v;
+        document.getElementById("v-" + k).textContent = fmt(k, v);
+        markDirty();
+      }
+      function upGrid(v) {
+        pushHistory();
+        P.grid = v === 1;
+        document.getElementById("v-grid").textContent = P.grid ? "ON" : "OFF";
+        markDirty();
+      }
+      function upSpeed(v) {
+        P.speed = v;
+        document.getElementById("v-speed").textContent = SPEED_LBL[v];
+        if (animTimer !== null) {
+          clearInterval(animTimer);
+          animTimer = null;
+        }
+        startLoop();
+      }
+      function setCol(i, v) {
+        pushHistory();
+        P.colors[i] = v;
+        const sw = document.getElementById("cc" + i);
+        if (sw && sw.value !== v) sw.value = v;
+        const hx = document.getElementById("hx" + i);
+        if (hx && document.activeElement !== hx)
+          hx.value = v.replace("#", "").toUpperCase();
+        markDirty();
+      }
+      function onHexInput(i, raw) {
+        const val = raw.replace("#", "").trim();
+        if (val.length === 6 && /^[0-9A-Fa-f]{6}$/.test(val)) {
+          P.colors[i] = "#" + val.toLowerCase();
+          const sw = document.getElementById("cc" + i);
+          if (sw) sw.value = P.colors[i];
+          markDirty();
+        }
+      }
+      function syncHexDisplay(i) {
+        const hx = document.getElementById("hx" + i);
+        if (hx) hx.value = P.colors[i].replace("#", "").toUpperCase();
+        pushHistory();
+      }
+      function setMode(m) {
+        pushHistory();
+        P.colorMode = m;
+        document
+          .querySelectorAll("[data-m]")
+          .forEach((b) => b.classList.toggle("on", b.dataset.m === m));
+        markDirty();
+      }
+      function togMirror(k) {
+        pushHistory();
+        P[k] = !P[k];
+        document.getElementById("t-" + k).classList.toggle("on", P[k]);
+        markDirty();
+      }
+      function setPal(n) {
+        const p = PALS[n];
+        if (!p) return;
+        pushHistory();
+        p.forEach((c, i) => {
+          P.colors[i] = c;
+          const sw = document.getElementById("cc" + i);
+          if (sw) sw.value = c;
+          const hx = document.getElementById("hx" + i);
+          if (hx) hx.value = c.replace("#", "").toUpperCase();
+        });
+        markDirty();
+      }
+      function lp(n) {
+        const pr = PRESETS[n];
+        if (!pr) return;
+        pushHistory();
+        Object.entries(pr).forEach(([k, v]) => {
+          if (k === "mx") {
+            P.mx = v;
+            document.getElementById("t-mx").classList.toggle("on", v);
+          } else if (k === "my") {
+            P.my = v;
+            document.getElementById("t-my").classList.toggle("on", v);
+          } else {
+            P[k] = v;
+            const ve = document.getElementById("v-" + k);
+            if (ve) ve.textContent = fmt(k, v);
+            const sl = document.getElementById("s-" + k);
+            if (sl) sl.value = v;
+          }
+        });
+        markDirty();
+      }
+      function rnd() {
+        pushHistory();
+        P.rhythm = Math.floor(Math.random() * 20) + 2;
+        document.getElementById("v-rhythm").textContent = P.rhythm;
+        document.getElementById("s-rhythm").value = P.rhythm;
+        P.direction = Math.round(Math.random() * 100) / 100;
+        document.getElementById("v-direction").textContent =
+          P.direction.toFixed(2);
+        document.getElementById("s-direction").value = P.direction;
+        P.variation = Math.round(Math.random() * 80) / 100;
+        document.getElementById("v-variation").textContent =
+          P.variation.toFixed(2);
+        document.getElementById("s-variation").value = P.variation;
+        P.folds = Math.floor(Math.random() * 5);
+        document.getElementById("v-folds").textContent = P.folds;
+        document.getElementById("s-folds").value = P.folds;
+        P.rotation = Math.floor(Math.random() * 4);
+        document.getElementById("v-rotation").textContent = P.rotation;
+        document.getElementById("s-rotation").value = P.rotation;
+        P.gradient = Math.round(Math.random() * 100) / 100;
+        document.getElementById("v-gradient").textContent =
+          P.gradient.toFixed(2);
+        document.getElementById("s-gradient").value = P.gradient;
+        P.gradangle = Math.floor(Math.random() * 360);
+        document.getElementById("v-gradangle").textContent = P.gradangle;
+        document.getElementById("s-gradangle").value = P.gradangle;
+        P.mx = Math.random() > 0.5;
+        document.getElementById("t-mx").classList.toggle("on", P.mx);
+        P.my = Math.random() > 0.5;
+        document.getElementById("t-my").classList.toggle("on", P.my);
+        const modes = ["flat", "gradient", "weavemix"];
+        P.colorMode = modes[Math.floor(Math.random() * 3)];
+        document
+          .querySelectorAll("[data-m]")
+          .forEach((b) =>
+            b.classList.toggle("on", b.dataset.m === P.colorMode),
+          );
+        const palKeys = Object.keys(PALS);
+        const p = PALS[palKeys[Math.floor(Math.random() * palKeys.length)]];
+        p.forEach((c, i) => {
+          P.colors[i] = c;
+          const sw = document.getElementById("cc" + i);
+          if (sw) sw.value = c;
+          const hx = document.getElementById("hx" + i);
+          if (hx) hx.value = c.replace("#", "").toUpperCase();
+        });
+        markDirty();
+      }
+      function xpng() {
+        const a = document.createElement("a");
+        a.download = "pattern-" + Date.now() + ".png";
+        a.href = document.getElementById("c").toDataURL();
+        a.click();
+      }
+      function toggleAcc(hd) {
+        hd.parentElement.classList.toggle("open");
+      }
+
+      const PALS = {
+        rust: ["#d4c9b0", "#8b3a1a", "#4a6e8a", "#c87830"],
+        ikat: ["#e8dfc8", "#2a4858", "#7bab8a", "#d4883a"],
+        forest: ["#f2ede4", "#2d4a1e", "#8ab87a", "#c8b040"],
+        plaid: ["#e8e0d0", "#4a3020", "#8a6040", "#c0a870"],
+        loom: ["#e0d8c8", "#1e3a5a", "#4a8ab4", "#c8a030"],
+        chalk: ["#2a2a2a", "#f0ece0", "#a8b8c0", "#e0c890"],
+      };
+      const PRESETS = {
+        plain: {
+          rhythm: 6,
+          direction: 0.5,
+          variation: 0,
+          folds: 0,
+          mx: false,
+          my: false,
+          rotation: 0,
+        },
+        twill: {
+          rhythm: 8,
+          direction: 0.75,
+          variation: 0.05,
+          folds: 0,
+          mx: false,
+          my: false,
+          rotation: 0,
+        },
+        stripe: {
+          rhythm: 4,
+          direction: 0.02,
+          variation: 0.08,
+          folds: 0,
+          mx: false,
+          my: false,
+          rotation: 0,
+        },
+        check: {
+          rhythm: 6,
+          direction: 0.5,
+          variation: 0,
+          folds: 1,
+          mx: false,
+          my: false,
+          rotation: 0,
+        },
+        diamond: {
+          rhythm: 8,
+          direction: 0.5,
+          variation: 0,
+          folds: 2,
+          mx: true,
+          my: true,
+          rotation: 1,
+        },
+        medallion: {
+          rhythm: 10,
+          direction: 0.55,
+          variation: 0.12,
+          folds: 3,
+          mx: true,
+          my: true,
+          rotation: 2,
+        },
+        ikat: {
+          rhythm: 8,
+          direction: 0.5,
+          variation: 0.65,
+          folds: 1,
+          mx: true,
+          my: false,
+          rotation: 0,
+        },
+        complex: {
+          rhythm: 14,
+          direction: 0.65,
+          variation: 0.2,
+          folds: 4,
+          mx: true,
+          my: true,
+          rotation: 3,
+        },
+      };
+
+      let dirty = true,
+        seed = 0,
+        lastT = performance.now(),
+        animTimer = null;
+      function renderFrame() {
+        const canvas = document.getElementById("c"),
+          cw = document.getElementById("cw"),
+          now = performance.now(),
+          dt = now - lastT;
+        lastT = now;
+        if (P.speed > 0) seed += dt * 0.001 * SPEED_INC[P.speed] * 1000;
+        if (P.speed > 0 || dirty) {
+          PE.draw(
+            canvas,
+            {
+              W: cw.offsetWidth,
+              H: cw.offsetHeight,
+              rh: P.rhythm,
+              d: P.direction,
+              va: P.variation,
+              folds: P.folds,
+              mx: P.mx,
+              my: P.my,
+              rot: P.rotation,
+              c0: P.colors[0],
+              c1: P.colors[1],
+              c2: P.colors[2],
+              c3: P.colors[3],
+              mode: P.colorMode,
+              gr: P.gradient,
+              ga: P.gradangle,
+              grid: P.grid,
+              cell: 8,
+            },
+            seed,
+          );
+          dirty = false;
+        }
+      }
+      function startLoop() {
+        if (animTimer !== null) {
+          clearInterval(animTimer);
+          animTimer = null;
+        }
+        if (P.speed === 0) {
+          renderFrame();
+        } else {
+          animTimer = setInterval(renderFrame, SPEED_MS[P.speed]);
+        }
+      }
+      function markDirty() {
+        dirty = true;
+        if (P.speed === 0) renderFrame();
+      }
+
+      window.addEventListener("load", () => {
+        startLoop();
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            dirty = true;
+            if (P.speed === 0) renderFrame();
+          }, 100);
+        });
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            if (animTimer !== null) {
+              clearInterval(animTimer);
+              animTimer = null;
+            }
+          } else {
+            if (animTimer === null && P.speed > 0) startLoop();
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+            e.preventDefault();
+            undo();
+          }
+        });
+      });
+    </script>
+
+    <!-- ── MOBILE: settings button + fullscreen panel ── -->
+    <button
+      class="mob-settings-btn"
+      id="mob-open-btn"
+      style="display: none"
+      onclick="document.getElementById('mob-panel').classList.add('open')"
+    >
+      Parameters
+    </button>
+
+    <div class="mobile-actions" style="display: none">
+      <button class="mob-btn mob-btn-primary" onclick="rnd()">Randomise</button>
+      <button class="mob-btn mob-btn-secondary" onclick="xpng()">Export</button>
+    </div>
+
+    <div id="mob-panel">
+      <button
+        id="mob-panel-close"
+        onclick="document.getElementById('mob-panel').classList.remove('open')"
+      >
+        ✕
+      </button>
+
+      <!-- Mirror of the desktop sidebar content, with same IDs won't work — use classes -->
+      <div style="padding: 0 0 40px 0">
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Structure
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row"><span class="p-name">Presets</span></div>
+            <div class="pal-grid" style="margin-bottom: 4px">
+              <button
+                class="pal"
+                onclick="
+                  lp('plain');
+                  closeMob();
+                "
+              >
+                plain
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('twill');
+                  closeMob();
+                "
+              >
+                twill
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('stripe');
+                  closeMob();
+                "
+              >
+                stripe
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('check');
+                  closeMob();
+                "
+              >
+                check
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('diamond');
+                  closeMob();
+                "
+              >
+                diamond
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('medallion');
+                  closeMob();
+                "
+              >
+                medallion
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('ikat');
+                  closeMob();
+                "
+              >
+                ikat
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  lp('complex');
+                  closeMob();
+                "
+              >
+                complex
+              </button>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Rhythm</span
+              ><span class="p-val" id="mv-rhythm">8</span>
+            </div>
+            <input
+              type="range"
+              min="2"
+              max="24"
+              step="1"
+              value="8"
+              oninput="
+                up('rhythm', +this.value);
+                document.getElementById('mv-rhythm').textContent = this.value;
+              "
+            />
+            <div class="p-row">
+              <span class="p-name">Direction</span
+              ><span class="p-val" id="mv-direction">0.50</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.5"
+              oninput="
+                up('direction', +this.value);
+                document.getElementById('mv-direction').textContent = (+this
+                  .value).toFixed(2);
+              "
+            />
+            <div class="p-row">
+              <span class="p-name">Variation</span
+              ><span class="p-val" id="mv-variation">0.00</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+              oninput="
+                up('variation', +this.value);
+                document.getElementById('mv-variation').textContent = (+this
+                  .value).toFixed(2);
+              "
+            />
+          </div>
+        </div>
+
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Symmetry
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row">
+              <span class="p-name">Folds</span
+              ><span class="p-val" id="mv-folds">0</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="4"
+              step="1"
+              value="0"
+              oninput="
+                up('folds', +this.value);
+                document.getElementById('mv-folds').textContent = this.value;
+              "
+            />
+            <div class="p-row" style="padding-bottom: 0">
+              <span class="p-name">Mirror</span>
+            </div>
+            <div class="tog-row">
+              <button
+                class="tog"
+                id="mt-mx"
+                onclick="
+                  togMirror('mx');
+                  this.classList.toggle('on');
+                "
+              >
+                horizontal
+              </button>
+              <button
+                class="tog"
+                id="mt-my"
+                onclick="
+                  togMirror('my');
+                  this.classList.toggle('on');
+                "
+              >
+                vertical
+              </button>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Rotation</span
+              ><span class="p-val" id="mv-rotation">0</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="3"
+              step="1"
+              value="0"
+              oninput="
+                up('rotation', +this.value);
+                document.getElementById('mv-rotation').textContent = this.value;
+              "
+            />
+          </div>
+        </div>
+
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Color
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="color-grid">
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    value="#f0ebe2"
+                    oninput="setCol(0, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    value="F0EBE2"
+                    maxlength="7"
+                    oninput="onHexInput(0, this.value)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    value="#141210"
+                    oninput="setCol(1, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    value="141210"
+                    maxlength="7"
+                    oninput="onHexInput(1, this.value)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    value="#4a8fa8"
+                    oninput="setCol(2, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    value="4A8FA8"
+                    maxlength="7"
+                    oninput="onHexInput(2, this.value)"
+                  />
+                </div>
+              </div>
+              <div class="color-item">
+                <div class="color-row">
+                  <input
+                    type="color"
+                    class="swatch"
+                    value="#c8a84b"
+                    oninput="setCol(3, this.value)"
+                  />
+                  <input
+                    type="text"
+                    class="hex-input"
+                    value="C8A84B"
+                    maxlength="7"
+                    oninput="onHexInput(3, this.value)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="p-row" style="padding-bottom: 0">
+              <span class="p-name">Mode</span>
+            </div>
+            <div class="tog-row">
+              <button class="tog on" data-m="flat" onclick="setMode('flat')">
+                flat
+              </button>
+              <button
+                class="tog"
+                data-m="gradient"
+                onclick="setMode('gradient')"
+              >
+                gradient
+              </button>
+              <button
+                class="tog"
+                data-m="weavemix"
+                onclick="setMode('weavemix')"
+              >
+                weave
+              </button>
+            </div>
+            <div class="p-row"><span class="p-name">Palette Presets</span></div>
+            <div class="pal-grid">
+              <button
+                class="pal"
+                onclick="
+                  setPal('rust');
+                  closeMob();
+                "
+              >
+                rust
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  setPal('ikat');
+                  closeMob();
+                "
+              >
+                ikat
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  setPal('loom');
+                  closeMob();
+                "
+              >
+                loom
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  setPal('forest');
+                  closeMob();
+                "
+              >
+                forest
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  setPal('plaid');
+                  closeMob();
+                "
+              >
+                plaid
+              </button>
+              <button
+                class="pal"
+                onclick="
+                  setPal('chalk');
+                  closeMob();
+                "
+              >
+                chalk
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <div class="acc-hd" onclick="toggleAcc(this)">
+            Display
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            >
+              <path d="M2 4l4 4 4-4" />
+            </svg>
+          </div>
+          <div class="acc-body">
+            <div class="p-row">
+              <span class="p-name">Grid lines</span
+              ><span class="p-val" id="mv-grid">ON</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="1"
+              value="1"
+              oninput="
+                upGrid(+this.value);
+                document.getElementById('mv-grid').textContent = +this.value
+                  ? 'ON'
+                  : 'OFF';
+              "
+            />
+            <div class="p-row">
+              <span class="p-name">Animation speed</span
+              ><span class="p-val" id="mv-speed">Slow</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="3"
+              step="1"
+              value="1"
+              oninput="
+                upSpeed(+this.value);
+                document.getElementById('mv-speed').textContent = [
+                  'OFF',
+                  'Slow',
+                  'Med',
+                  'Fast',
+                ][+this.value];
+              "
+            />
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- SYMMETRY -->
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">
-        Symmetry
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row"><span class="p-name">Folds</span><span class="p-val" id="v-folds">0</span></div>
-        <input type="range" id="s-folds" min="0" max="4" step="1" value="0" oninput="up('folds',+this.value)">
-        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mirror</span></div>
-        <div class="tog-row">
-          <button class="tog" id="t-mx" onclick="togMirror('mx')">horizontal</button>
-          <button class="tog" id="t-my" onclick="togMirror('my')">vertical</button>
-        </div>
-        <div class="p-row"><span class="p-name">Rotation</span><span class="p-val" id="v-rotation">0</span></div>
-        <input type="range" id="s-rotation" min="0" max="3" step="1" value="0" oninput="up('rotation',+this.value)">
-      </div>
-    </div>
+    <script>
+      function closeMob() {
+        document.getElementById("mob-panel").classList.remove("open");
+      }
 
-    <!-- COLOR -->
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">
-        Color
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="color-grid">
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" id="cc0" value="#f0ebe2" oninput="setCol(0,this.value)">
-            <input type="text"  class="hex-input" id="hx0" value="F0EBE2" maxlength="7" oninput="onHexInput(0,this.value)" onblur="syncHexDisplay(0)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" id="cc1" value="#141210" oninput="setCol(1,this.value)">
-            <input type="text"  class="hex-input" id="hx1" value="141210" maxlength="7" oninput="onHexInput(1,this.value)" onblur="syncHexDisplay(1)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" id="cc2" value="#4a8fa8" oninput="setCol(2,this.value)">
-            <input type="text"  class="hex-input" id="hx2" value="4A8FA8" maxlength="7" oninput="onHexInput(2,this.value)" onblur="syncHexDisplay(2)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" id="cc3" value="#c8a84b" oninput="setCol(3,this.value)">
-            <input type="text"  class="hex-input" id="hx3" value="C8A84B" maxlength="7" oninput="onHexInput(3,this.value)" onblur="syncHexDisplay(3)">
-          </div></div>
-        </div>
-        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mode</span></div>
-        <div class="tog-row">
-          <button class="tog on" data-m="flat"     onclick="setMode('flat')">flat</button>
-          <button class="tog"    data-m="gradient" onclick="setMode('gradient')">gradient</button>
-          <button class="tog"    data-m="weavemix" onclick="setMode('weavemix')">weave</button>
-        </div>
-        <div class="p-row"><span class="p-name">Gradient</span><span class="p-val" id="v-gradient">0.00</span></div>
-        <input type="range" id="s-gradient" min="0" max="1" step="0.01" value="0" oninput="up('gradient',+this.value)">
-        <div class="p-row"><span class="p-name">Grad. Angle</span><span class="p-val" id="v-gradangle">0</span></div>
-        <input type="range" id="s-gradangle" min="0" max="360" step="1" value="0" oninput="up('gradangle',+this.value)">
-        <div class="p-row" style="padding-bottom:2px;"><span class="p-name">Palette Presets</span></div>
-        <div class="pal-grid">
-          <button class="pal" onclick="setPal('rust')">rust</button>
-          <button class="pal" onclick="setPal('ikat')">ikat</button>
-          <button class="pal" onclick="setPal('loom')">loom</button>
-          <button class="pal" onclick="setPal('forest')">forest</button>
-          <button class="pal" onclick="setPal('plaid')">plaid</button>
-          <button class="pal" onclick="setPal('chalk')">chalk</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- DISPLAY -->
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">
-        Display
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row"><span class="p-name">Grid lines</span><span class="p-val" id="v-grid">ON</span></div>
-        <input type="range" id="s-grid" min="0" max="1" step="1" value="1" oninput="upGrid(+this.value)">
-        <div class="p-row"><span class="p-name">Animation speed</span><span class="p-val" id="v-speed">Slow</span></div>
-        <input type="range" id="s-speed" min="0" max="3" step="1" value="1" oninput="upSpeed(+this.value)">
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="act act-primary" onclick="rnd()">Randomise</button>
-      <button class="act act-secondary" onclick="xpng()">Export PNG</button>
-    </div>
-
-  </aside>
-
-  <main>
-    <div id="cw"><canvas id="c"></canvas></div>
-  </main>
-</div>
-
-<script>
-// ── Inline pattern engine (pattern.js) ──
-window.PE = (() => {
-  const T = 64;
-  function sn(x,y,s){
-    return(Math.sin(x*1.4+s*6.3)*Math.cos(y*0.95+s*3.7)*0.5
-          +Math.cos(x*2.3+y*1.8+s*4.1)*0.3
-          +Math.sin(x*0.7+y*2.6+s*2.9)*0.2)*0.5+0.5;
-  }
-  function h2r(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
-  function lc(a,b,t){return[Math.round(a[0]+(b[0]-a[0])*t),Math.round(a[1]+(b[1]-a[1])*t),Math.round(a[2]+(b[2]-a[2])*t)];}
-  function wB(c,r,rh,d){const rh2=Math.max(2,rh),cs=Math.floor(c/rh2)%2,ro=Math.max(1,Math.round(rh2*d)),rs=Math.floor(r/ro)%2;if(d<0.05)return rs;if(d>0.95)return cs;return(cs+rs)%2;}
-  function wL(c,r,rh,d){return(wB(c,r,rh,d)*2+wB(c,r,Math.max(2,Math.floor(rh/2)),d*0.8+0.1))>2?1:0;}
-  function buildRaw(rh,d,va,seed){
-    const raw=new Uint8Array(T*T);
-    for(let r=0;r<T;r++)for(let c=0;c<T;c++){let v=wL(c,r,rh,d);if(va>0&&sn(c*0.22,r*0.22,seed*1.7+3)<va*0.68)v=1-v;raw[r*T+c]=v;}
-    let ones=0;for(let i=0;i<T*T;i++)ones+=raw[i];
-    if(ones<T*T*0.1||ones>T*T*0.9){for(let r=0;r<T;r++)for(let c=0;c<T;c++)raw[r*T+c]=((Math.floor(c/Math.max(2,rh))+Math.floor(r/Math.max(2,rh)))%2);}
-    return raw;
-  }
-  function applyFolds(c,r,folds){let tc=((c%T)+T)%T,tr=((r%T)+T)%T;const h=T>>1,q=T>>2;if(folds>=1){if(tc>=h)tc=T-1-tc;if(tr>=h)tr=T-1-tr;}if(folds>=2){if(tc>tr){const t=tc;tc=tr;tr=t;}}if(folds>=3){tc%=h;tr%=h;}if(folds>=4){tc%=q;tr%=q;}return[Math.min(tc,T-1),Math.min(tr,T-1)];}
-  function applyMirror(tc,tr,mx,my){const h=T>>1;if(mx&&tc>=h)tc=T-1-tc;if(my&&tr>=h)tr=T-1-tr;return[tc,tr];}
-  function applyRot(tc,tr,rot){if(!rot)return[tc,tr];const h=T>>1;let x=tc,y=tr;if(rot>=1){if(y>=h){x=T-1-x;y=T-1-y;}}if(rot>=2){if(x>=h)x=T-1-x;}if(rot>=3){x%=h;y%=h;if(x>y){const t=x;x=y;y=t;}}return[Math.min(x,T-1),Math.min(y,T-1)];}
-  let _imgData=null,_imgW=0,_imgH=0;
-  function draw(canvas,cfg,seed){
-    const{W,H,rh=8,d=0.5,va=0,folds=0,mx=false,my=false,rot=0,c0='#f0ebe2',c1='#141210',c2,c3,mode='flat',gr=0,ga=0,grid=true,cell=8}=cfg;
-    if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;_imgData=null;}
-    const ctx=canvas.getContext('2d');
-    if(!_imgData||_imgW!==W||_imgH!==H){_imgData=ctx.createImageData(W,H);_imgW=W;_imgH=H;}
-    const raw=buildRaw(rh,d,va,seed);
-    const tile=new Uint8Array(T*T);
-    for(let r=0;r<T;r++)for(let c=0;c<T;c++){let[tc,tr]=applyFolds(c,r,folds);[tc,tr]=applyMirror(tc,tr,mx,my);[tc,tr]=applyRot(tc,tr,rot);tile[r*T+c]=raw[tr*T+tc];}
-    const ca=h2r(c0),cb=h2r(c1),cc=c2?h2r(c2):cb,cd=c3?h2r(c3):ca;
-    const gap=grid?1:0,cSize=Math.max(1,cell-gap),nC=Math.ceil(W/cell)+2,nR=Math.ceil(H/cell)+2;
-    let ang=0,cosA=0,sinA=0,cx2=0,cy2=0,mp=0;
-    if(gr>0.01&&(mode==='gradient'||mode==='weavemix')){ang=ga*Math.PI/180;cosA=Math.cos(ang);sinA=Math.sin(ang);cx2=W/2;cy2=H/2;mp=Math.sqrt(W*W+H*H)/2;}
-    const buf=_imgData.data;
-    const[gr0,gg0,gb0]=ca;
-    for(let i=0;i<buf.length;i+=4){buf[i]=gr0;buf[i+1]=gg0;buf[i+2]=gb0;buf[i+3]=255;}
-    for(let row=0;row<nR;row++){for(let col=0;col<nC;col++){
-      const tr2=((row%T)+T)%T,tc2=((col%T)+T)%T,ia=tile[tr2*T+tc2]===1;
-      let r,g,b;
-      if(mode==='flat'){const cl=ia?ca:cb;r=cl[0];g=cl[1];b=cl[2];}
-      else if(mode==='gradient'){let gf=0;if(gr>0.01){const px=col*cell-cx2,py=row*cell-cy2,pr=cosA*px+sinA*py;gf=Math.max(0,Math.min(1,(pr/mp+1)/2))*gr;}const cl=ia?lc(ca,cc,gf):lc(cb,cd,gf);r=cl[0];g=cl[1];b=cl[2];}
-      else{const step=Math.max(1,Math.floor(rh/2)),colP=Math.floor(tc2/step)%2,rowP=Math.floor(tr2/step)%2;let cl=ia?(colP===0?ca:cc):(rowP===0?cb:cd);if(gr>0.01){const px=col*cell-cx2,py=row*cell-cy2,pr=cosA*px+sinA*py,gf=Math.max(0,Math.min(1,(pr/mp+1)/2))*gr*0.4;cl=lc(cl,ia?cc:cd,gf);}r=cl[0];g=cl[1];b=cl[2];}
-      const x0=col*cell,y0=row*cell,x1=Math.min(x0+cSize,W),y1=Math.min(y0+cSize,H);
-      for(let py=y0;py<y1;py++){const rowOff=py*W*4;for(let px=x0;px<x1;px++){const i=rowOff+px*4;buf[i]=r;buf[i+1]=g;buf[i+2]=b;buf[i+3]=255;}}
-    }}
-    ctx.putImageData(_imgData,0,0);
-  }
-  function once(canvas,cfg){const p=canvas.parentElement;const W=p?p.offsetWidth:canvas.width||300;const H=p?p.offsetHeight:canvas.height||300;draw(canvas,{...cfg,W,H},cfg.seed||42);}
-  function live(canvas,cfg,speed=0.00018){let s=Math.random()*100,raf;function tick(){const p=canvas.parentElement;const W=p?p.offsetWidth:canvas.width||300;const H=p?p.offsetHeight:canvas.height||300;draw(canvas,{...cfg,W,H},s);s+=speed;raf=requestAnimationFrame(tick);}tick();return()=>cancelAnimationFrame(raf);}
-  return{draw,once,live};
-})();
-
-// ── App state ──
-const P = {
-  rhythm:8, direction:0.5, variation:0,
-  folds:0, mx:false, my:false, rotation:0,
-  colors:['#f0ebe2','#141210','#4a8fa8','#c8a84b'],
-  colorMode:'flat', gradient:0, gradangle:0,
-  grid:true, speed:1
-};
-
-const SPEED_MS  = [0, 120, 40, 14];
-const SPEED_INC = [0, 0.00018, 0.00055, 0.0016];
-const SPEED_LBL = ['OFF','Slow','Med','Fast'];
-
-const HISTORY = [], MAX_HISTORY = 30;
-function snapshot(){return JSON.stringify({rhythm:P.rhythm,direction:P.direction,variation:P.variation,folds:P.folds,mx:P.mx,my:P.my,rotation:P.rotation,colors:[...P.colors],colorMode:P.colorMode,gradient:P.gradient,gradangle:P.gradangle,grid:P.grid,speed:P.speed});}
-function pushHistory(){const s=snapshot();if(HISTORY.length&&HISTORY[HISTORY.length-1]===s)return;HISTORY.push(s);if(HISTORY.length>MAX_HISTORY)HISTORY.shift();}
-function undo(){if(!HISTORY.length)return;_applyState(JSON.parse(HISTORY.pop()));markDirty();}
-function _applyState(s){
-  ['rhythm','direction','variation','folds','rotation','gradient','gradangle'].forEach(k=>{if(s[k]===undefined)return;P[k]=s[k];const ve=document.getElementById('v-'+k);if(ve)ve.textContent=fmt(k,s[k]);const sl=document.getElementById('s-'+k);if(sl)sl.value=s[k];});
-  P.mx=s.mx||false;P.my=s.my||false;
-  document.getElementById('t-mx').classList.toggle('on',P.mx);
-  document.getElementById('t-my').classList.toggle('on',P.my);
-  P.colorMode=s.colorMode||'flat';
-  document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===P.colorMode));
-  if(s.colors)s.colors.forEach((c,i)=>{P.colors[i]=c;const sw=document.getElementById('cc'+i);if(sw)sw.value=c;const hx=document.getElementById('hx'+i);if(hx)hx.value=c.replace('#','').toUpperCase();});
-  if(s.grid!==undefined){P.grid=s.grid;document.getElementById('v-grid').textContent=P.grid?'ON':'OFF';document.getElementById('s-grid').value=P.grid?1:0;}
-}
-function fmt(k,v){if(['direction','variation','gradient'].includes(k))return(+v).toFixed(2);return v;}
-function up(k,v){pushHistory();P[k]=v;document.getElementById('v-'+k).textContent=fmt(k,v);markDirty();}
-function upGrid(v){pushHistory();P.grid=v===1;document.getElementById('v-grid').textContent=P.grid?'ON':'OFF';markDirty();}
-function upSpeed(v){P.speed=v;document.getElementById('v-speed').textContent=SPEED_LBL[v];if(animTimer!==null){clearInterval(animTimer);animTimer=null;}startLoop();}
-function setCol(i,v){pushHistory();P.colors[i]=v;const sw=document.getElementById('cc'+i);if(sw&&sw.value!==v)sw.value=v;const hx=document.getElementById('hx'+i);if(hx&&document.activeElement!==hx)hx.value=v.replace('#','').toUpperCase();markDirty();}
-function onHexInput(i,raw){const val=raw.replace('#','').trim();if(val.length===6&&/^[0-9A-Fa-f]{6}$/.test(val)){P.colors[i]='#'+val.toLowerCase();const sw=document.getElementById('cc'+i);if(sw)sw.value=P.colors[i];markDirty();}}
-function syncHexDisplay(i){const hx=document.getElementById('hx'+i);if(hx)hx.value=P.colors[i].replace('#','').toUpperCase();pushHistory();}
-function setMode(m){pushHistory();P.colorMode=m;document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));markDirty();}
-function togMirror(k){pushHistory();P[k]=!P[k];document.getElementById('t-'+k).classList.toggle('on',P[k]);markDirty();}
-function setPal(n){const p=PALS[n];if(!p)return;pushHistory();p.forEach((c,i)=>{P.colors[i]=c;const sw=document.getElementById('cc'+i);if(sw)sw.value=c;const hx=document.getElementById('hx'+i);if(hx)hx.value=c.replace('#','').toUpperCase();});markDirty();}
-function lp(n){const pr=PRESETS[n];if(!pr)return;pushHistory();Object.entries(pr).forEach(([k,v])=>{if(k==='mx'){P.mx=v;document.getElementById('t-mx').classList.toggle('on',v);}else if(k==='my'){P.my=v;document.getElementById('t-my').classList.toggle('on',v);}else{P[k]=v;const ve=document.getElementById('v-'+k);if(ve)ve.textContent=fmt(k,v);const sl=document.getElementById('s-'+k);if(sl)sl.value=v;}});markDirty();}
-function rnd(){
-  pushHistory();
-  P.rhythm=Math.floor(Math.random()*20)+2;document.getElementById('v-rhythm').textContent=P.rhythm;document.getElementById('s-rhythm').value=P.rhythm;
-  P.direction=Math.round(Math.random()*100)/100;document.getElementById('v-direction').textContent=P.direction.toFixed(2);document.getElementById('s-direction').value=P.direction;
-  P.variation=Math.round(Math.random()*80)/100;document.getElementById('v-variation').textContent=P.variation.toFixed(2);document.getElementById('s-variation').value=P.variation;
-  P.folds=Math.floor(Math.random()*5);document.getElementById('v-folds').textContent=P.folds;document.getElementById('s-folds').value=P.folds;
-  P.rotation=Math.floor(Math.random()*4);document.getElementById('v-rotation').textContent=P.rotation;document.getElementById('s-rotation').value=P.rotation;
-  P.gradient=Math.round(Math.random()*100)/100;document.getElementById('v-gradient').textContent=P.gradient.toFixed(2);document.getElementById('s-gradient').value=P.gradient;
-  P.gradangle=Math.floor(Math.random()*360);document.getElementById('v-gradangle').textContent=P.gradangle;document.getElementById('s-gradangle').value=P.gradangle;
-  P.mx=Math.random()>0.5;document.getElementById('t-mx').classList.toggle('on',P.mx);
-  P.my=Math.random()>0.5;document.getElementById('t-my').classList.toggle('on',P.my);
-  const modes=['flat','gradient','weavemix'];P.colorMode=modes[Math.floor(Math.random()*3)];
-  document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===P.colorMode));
-  const palKeys=Object.keys(PALS);const p=PALS[palKeys[Math.floor(Math.random()*palKeys.length)]];
-  p.forEach((c,i)=>{P.colors[i]=c;const sw=document.getElementById('cc'+i);if(sw)sw.value=c;const hx=document.getElementById('hx'+i);if(hx)hx.value=c.replace('#','').toUpperCase();});
-  markDirty();
-}
-function xpng(){const a=document.createElement('a');a.download='pattern-'+Date.now()+'.png';a.href=document.getElementById('c').toDataURL();a.click();}
-function toggleAcc(hd){hd.parentElement.classList.toggle('open');}
-
-const PALS = {
-  rust:  ['#d4c9b0','#8b3a1a','#4a6e8a','#c87830'],
-  ikat:  ['#e8dfc8','#2a4858','#7bab8a','#d4883a'],
-  forest:['#f2ede4','#2d4a1e','#8ab87a','#c8b040'],
-  plaid: ['#e8e0d0','#4a3020','#8a6040','#c0a870'],
-  loom:  ['#e0d8c8','#1e3a5a','#4a8ab4','#c8a030'],
-  chalk: ['#2a2a2a','#f0ece0','#a8b8c0','#e0c890'],
-};
-const PRESETS = {
-  plain:    {rhythm:6,  direction:0.5,  variation:0,    folds:0, mx:false, my:false, rotation:0},
-  twill:    {rhythm:8,  direction:0.75, variation:0.05, folds:0, mx:false, my:false, rotation:0},
-  stripe:   {rhythm:4,  direction:0.02, variation:0.08, folds:0, mx:false, my:false, rotation:0},
-  check:    {rhythm:6,  direction:0.5,  variation:0,    folds:1, mx:false, my:false, rotation:0},
-  diamond:  {rhythm:8,  direction:0.5,  variation:0,    folds:2, mx:true,  my:true,  rotation:1},
-  medallion:{rhythm:10, direction:0.55, variation:0.12, folds:3, mx:true,  my:true,  rotation:2},
-  ikat:     {rhythm:8,  direction:0.5,  variation:0.65, folds:1, mx:true,  my:false, rotation:0},
-  complex:  {rhythm:14, direction:0.65, variation:0.2,  folds:4, mx:true,  my:true,  rotation:3},
-};
-
-let dirty=true, seed=0, lastT=performance.now(), animTimer=null;
-function renderFrame(){
-  const canvas=document.getElementById('c'),cw=document.getElementById('cw'),now=performance.now(),dt=now-lastT;lastT=now;
-  if(P.speed>0)seed+=dt*0.001*SPEED_INC[P.speed]*1000;
-  if(P.speed>0||dirty){PE.draw(canvas,{W:cw.offsetWidth,H:cw.offsetHeight,rh:P.rhythm,d:P.direction,va:P.variation,folds:P.folds,mx:P.mx,my:P.my,rot:P.rotation,c0:P.colors[0],c1:P.colors[1],c2:P.colors[2],c3:P.colors[3],mode:P.colorMode,gr:P.gradient,ga:P.gradangle,grid:P.grid,cell:8},seed);dirty=false;}
-}
-function startLoop(){
-  if(animTimer!==null){clearInterval(animTimer);animTimer=null;}
-  if(P.speed===0){renderFrame();}else{animTimer=setInterval(renderFrame,SPEED_MS[P.speed]);}
-}
-function markDirty(){dirty=true;if(P.speed===0)renderFrame();}
-
-window.addEventListener('load',()=>{
-  startLoop();
-  let resizeTimer;
-  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{dirty=true;if(P.speed===0)renderFrame();},100);});
-  document.addEventListener('visibilitychange',()=>{if(document.hidden){if(animTimer!==null){clearInterval(animTimer);animTimer=null;}}else{if(animTimer===null&&P.speed>0)startLoop();}});
-  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo();}});
-});
-</script>
-
-
-<!-- ── MOBILE: settings button + fullscreen panel ── -->
-<button class="mob-settings-btn" id="mob-open-btn" style="display:none" onclick="document.getElementById('mob-panel').classList.add('open')">Parameters</button>
-
-<div class="mobile-actions" style="display:none">
-  <button class="mob-btn mob-btn-primary" onclick="rnd()">Randomise</button>
-  <button class="mob-btn mob-btn-secondary" onclick="xpng()">Export</button>
-</div>
-
-<div id="mob-panel">
-  <button id="mob-panel-close" onclick="document.getElementById('mob-panel').classList.remove('open')">✕</button>
-
-  <!-- Mirror of the desktop sidebar content, with same IDs won't work — use classes -->
-  <div style="padding:0 0 40px 0;">
-
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">Structure
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row"><span class="p-name">Presets</span></div>
-        <div class="pal-grid" style="margin-bottom:4px;">
-          <button class="pal" onclick="lp('plain');closeMob()">plain</button>
-          <button class="pal" onclick="lp('twill');closeMob()">twill</button>
-          <button class="pal" onclick="lp('stripe');closeMob()">stripe</button>
-          <button class="pal" onclick="lp('check');closeMob()">check</button>
-          <button class="pal" onclick="lp('diamond');closeMob()">diamond</button>
-          <button class="pal" onclick="lp('medallion');closeMob()">medallion</button>
-          <button class="pal" onclick="lp('ikat');closeMob()">ikat</button>
-          <button class="pal" onclick="lp('complex');closeMob()">complex</button>
-        </div>
-        <div class="p-row"><span class="p-name">Rhythm</span><span class="p-val" id="mv-rhythm">8</span></div>
-        <input type="range" min="2" max="24" step="1" value="8" oninput="up('rhythm',+this.value);document.getElementById('mv-rhythm').textContent=this.value">
-        <div class="p-row"><span class="p-name">Direction</span><span class="p-val" id="mv-direction">0.50</span></div>
-        <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="up('direction',+this.value);document.getElementById('mv-direction').textContent=(+this.value).toFixed(2)">
-        <div class="p-row"><span class="p-name">Variation</span><span class="p-val" id="mv-variation">0.00</span></div>
-        <input type="range" min="0" max="1" step="0.01" value="0" oninput="up('variation',+this.value);document.getElementById('mv-variation').textContent=(+this.value).toFixed(2)">
-      </div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">Symmetry
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row"><span class="p-name">Folds</span><span class="p-val" id="mv-folds">0</span></div>
-        <input type="range" min="0" max="4" step="1" value="0" oninput="up('folds',+this.value);document.getElementById('mv-folds').textContent=this.value">
-        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mirror</span></div>
-        <div class="tog-row">
-          <button class="tog" id="mt-mx" onclick="togMirror('mx');this.classList.toggle('on')">horizontal</button>
-          <button class="tog" id="mt-my" onclick="togMirror('my');this.classList.toggle('on')">vertical</button>
-        </div>
-        <div class="p-row"><span class="p-name">Rotation</span><span class="p-val" id="mv-rotation">0</span></div>
-        <input type="range" min="0" max="3" step="1" value="0" oninput="up('rotation',+this.value);document.getElementById('mv-rotation').textContent=this.value">
-      </div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">Color
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="color-grid">
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" value="#f0ebe2" oninput="setCol(0,this.value)">
-            <input type="text" class="hex-input" value="F0EBE2" maxlength="7" oninput="onHexInput(0,this.value)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" value="#141210" oninput="setCol(1,this.value)">
-            <input type="text" class="hex-input" value="141210" maxlength="7" oninput="onHexInput(1,this.value)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" value="#4a8fa8" oninput="setCol(2,this.value)">
-            <input type="text" class="hex-input" value="4A8FA8" maxlength="7" oninput="onHexInput(2,this.value)">
-          </div></div>
-          <div class="color-item"><div class="color-row">
-            <input type="color" class="swatch" value="#c8a84b" oninput="setCol(3,this.value)">
-            <input type="text" class="hex-input" value="C8A84B" maxlength="7" oninput="onHexInput(3,this.value)">
-          </div></div>
-        </div>
-        <div class="p-row" style="padding-bottom:0;"><span class="p-name">Mode</span></div>
-        <div class="tog-row">
-          <button class="tog on" data-m="flat"     onclick="setMode('flat')">flat</button>
-          <button class="tog"    data-m="gradient" onclick="setMode('gradient')">gradient</button>
-          <button class="tog"    data-m="weavemix" onclick="setMode('weavemix')">weave</button>
-        </div>
-        <div class="p-row"><span class="p-name">Palette Presets</span></div>
-        <div class="pal-grid">
-          <button class="pal" onclick="setPal('rust');closeMob()">rust</button>
-          <button class="pal" onclick="setPal('ikat');closeMob()">ikat</button>
-          <button class="pal" onclick="setPal('loom');closeMob()">loom</button>
-          <button class="pal" onclick="setPal('forest');closeMob()">forest</button>
-          <button class="pal" onclick="setPal('plaid');closeMob()">plaid</button>
-          <button class="pal" onclick="setPal('chalk');closeMob()">chalk</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-hd" onclick="toggleAcc(this)">Display
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg>
-      </div>
-      <div class="acc-body">
-        <div class="p-row"><span class="p-name">Grid lines</span><span class="p-val" id="mv-grid">ON</span></div>
-        <input type="range" min="0" max="1" step="1" value="1" oninput="upGrid(+this.value);document.getElementById('mv-grid').textContent=+this.value?'ON':'OFF'">
-        <div class="p-row"><span class="p-name">Animation speed</span><span class="p-val" id="mv-speed">Slow</span></div>
-        <input type="range" min="0" max="3" step="1" value="1" oninput="upSpeed(+this.value);document.getElementById('mv-speed').textContent=['OFF','Slow','Med','Fast'][+this.value]">
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<script>
-  function closeMob() { document.getElementById('mob-panel').classList.remove('open'); }
-
-  // Show mobile UI only on small screens
-  function checkMobile() {
-    var isMob = window.innerWidth <= 768;
-    var btn = document.getElementById('mob-open-btn');
-    var acts = document.querySelector('.mobile-actions');
-    if (btn)  btn.style.display  = isMob ? 'block' : 'none';
-    if (acts) acts.style.display = isMob ? 'flex'  : 'none';
-  }
-  checkMobile();
-  window.addEventListener('resize', checkMobile);
-</script>
-
-</body>
+      // Show mobile UI only on small screens
+      function checkMobile() {
+        var isMob = window.innerWidth <= 768;
+        var btn = document.getElementById("mob-open-btn");
+        var acts = document.querySelector(".mobile-actions");
+        if (btn) btn.style.display = isMob ? "block" : "none";
+        if (acts) acts.style.display = isMob ? "flex" : "none";
+      }
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+    </script>
+  </body>
 </html>
