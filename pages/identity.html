@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="nav.css" />
-  <link rel="stylesheet" href="artwork-page.css" />
+  <link rel="stylesheet" href="../css/nav.css" />
+  <link rel="stylesheet" href="../css/artwork-page.css" />
 </head>
 <body>
 
@@ -16,38 +16,18 @@
 <header>
   <img class="logo"
     src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
-    alt="Azcoiti" onclick="window.location.href='index.html'" />
+    alt="Azcoiti" onclick="window.location.href='../index.html'" />
   <span class="nav-tagline">Pattern Creation</span>
   <nav class="nav-links">
-    <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link" onclick="window.location.href='../generator.html'">Generator</button>
     <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
-    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
+    <button class="nav-link" onclick="window.location.href='../about.html'">About</button>
   </nav>
     <button class="nav-icon" aria-label="Isotype">
-    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+    <img id="isotype-img" src="../images/isotipo-04.png" alt="Isotype" />
   </button>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
+  
+  
 </header>
 
 <div class="page">
@@ -70,7 +50,7 @@
   </section>
 
   <!-- HERO IMAGE (replace with video when ready) -->
-  <img class="hero-image" src="Identity6.png" alt="Identity and Personality pattern" />
+  <img class="hero-image" src="../images/Identity6.png" alt="Identity and Personality pattern" />
 
   <!-- INFO -->
   <section class="info">
@@ -87,9 +67,9 @@
 
   <!-- GALLERY ROW -->
   <section class="gallery-row">
-    <img src="Identity1.png" alt="Model wearing patterned jacket" />
-    <img src="Identity2.png" alt="Pattern flat detail" />
-    <img src="Identity3.png" alt="Hood close-up detail" />
+    <img src="../images/Identity1.png" alt="Model wearing patterned jacket" />
+    <img src="../images/Identity2.png" alt="Pattern flat detail" />
+    <img src="../images/Identity3.png" alt="Hood close-up detail" />
   </section>
 
   <!-- PARAMETERS -->
@@ -126,8 +106,8 @@
 
   <!-- FOOTER GALLERY -->
   <section class="footer-gallery">
-    <img src="Identity4.png" alt="Jacket detail and zipper" />
-    <img src="Identity5.png" alt="Model on mountain wearing jacket" />
+    <img src="../images/Identity4.png" alt="Jacket detail and zipper" />
+    <img src="../images/Identity5.png" alt="Model on mountain wearing jacket" />
   </section>
 
   <!-- NAVIGATION -->

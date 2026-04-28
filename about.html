@@ -7,11 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="css/nav.css" />
   <style>
     @font-face {
       font-family: 'MDLorien';
-      src: url('MDLorien-Regular.otf') format('opentype');
+      src: url('fonts/MDLorien-Regular.otf') format('opentype');
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -217,34 +217,14 @@
   <span class="nav-tagline">Pattern Creation</span>
   <nav class="nav-links">
     <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
-    <button class="nav-link" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='pages/artwork.html'">Artwork</button>
     <button class="nav-link active" onclick="window.location.href='about.html'">About</button>
   </nav>
     <button class="nav-icon" aria-label="Isotype">
-    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+    <img id="isotype-img" src="images/isotipo-04.png" alt="Isotype" />
   </button>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
-  <script>
-    (function() {
-      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
-      var i = 0;
-      setInterval(function() {
-        i = (i + 1) % imgs.length;
-        var el = document.getElementById('isotype-img');
-        if (el) el.src = imgs[i];
-      }, 2000);
-    })();
-  </script>
+  
+  
 </header>
 
 <!-- ── PAGE ── -->
