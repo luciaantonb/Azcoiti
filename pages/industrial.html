@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industrial Production — Azcoiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="artwork-page.css" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <img class="logo"
+    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+    alt="Azcoiti" onclick="window.location.href='index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+  </button>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Industrial<br>Production</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">
+        <h2 class="hero-subtitle">Speed as a<br>business model</h2>
+      </div>
+      <div class="meta-block">
+        <span>Data visualization</span>
+        <span>Woven wicker stool</span>
+        <span>2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO IMAGE (replace with video when ready) -->
+  <img class="hero-image" src="Industrial6.png" alt="Industrial Production pattern" />
+
+  <!-- INFO -->
+  <section class="info">
+    <div class="section-label">Info</div>
+    <div class="info-col">
+      <p>In 2012, Zara could design, produce, and deliver a new garment in fourteen days. Shein has reduced that to ten. The average fast fashion garment has a useful life of less than twelve months, and is worn an average of seven times before it is discarded.</p>
+      <p>This is not a supply chain, it is a replication system. Industrial fast fashion production is built on the elimination of variation: every garment identical to the last, every batch identical to the previous one, the same process repeated at a scale that makes individual objects meaningless.</p>
+    </div>
+    <div class="info-col">
+      <p>The speed is not incidental. It is the product. The faster the cycle, the more product moves, and the more product moves, the faster the cycle needs to become.</p>
+      <p>Placed directly after "Wool Production", this piece is the contrast. Where that pattern is slow, low, and restrained, this one is dense, replicated, and maxed out. Same system, opposite values. The difference between the two patterns is the difference between the two ways of making clothes: one that respects the time it takes, and one that has abolished it.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY ROW -->
+  <section class="gallery-row">
+    <img src="Industrial1.png" alt="Woven stool from above" />
+    <img src="Industrial2.png" alt="Pattern flat detail" />
+    <img src="Industrial3.png" alt="Wicker weave corner close-up" />
+  </section>
+
+  <!-- PARAMETERS -->
+  <section class="params">
+    <div class="section-label">Parameters</div>
+    <div class="params-table">
+      <div class="param-row">
+        <span class="param-name">Rhythm</span>
+        <span class="param-value">14</span>
+        <span class="param-desc">The fourteen days of Zara's production cycle. The repeat unit of the pattern is set to the number of days it takes to go from design to shelf.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Direction</span>
+        <span class="param-value">0.10</span>
+        <span class="param-desc">Shein's ten-day production cycle. A low directional value, the pattern does not lean toward anything in particular. It simply replicates.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Variation</span>
+        <span class="param-value">0.00</span>
+        <span class="param-desc">Zero. Industrial production is identical in series. No drift, no irregularity, no human mark. Every unit the same as the last.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Folds</span>
+        <span class="param-value">4</span>
+        <span class="param-desc">Maximum. Mass replication in every direction. The pattern folds back on itself to its fullest extent.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Rotation</span>
+        <span class="param-value">2</span>
+        <span class="param-desc">Mid-range rotation. The system turns but does not advance. It moves without going anywhere.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER GALLERY -->
+  <section class="footer-gallery">
+    <img src="Industrial4.png" alt="Two woven stools on concrete floor" />
+    <img src="Industrial5.png" alt="Three stools arranged in sunlit room" />
+  </section>
+
+  <!-- NAVIGATION — previous only, no next -->
+  <div class="artwork-nav prev-only">
+    <a href="wool.html" class="prev">
+      <span class="nav-label">Previous Artwork</span>
+      <span class="nav-title">Wool Production</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="page-footer">© 2026 AZCOITI</footer>
+
+</body>
+</html>

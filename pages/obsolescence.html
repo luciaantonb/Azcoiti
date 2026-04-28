@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perceived Obsolescence — Azcoiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="artwork-page.css" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <img class="logo"
+    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+    alt="Azcoiti" onclick="window.location.href='index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+  </button>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+</header>
+
+<div class="page">
+
+  <!-- HERO — full viewport, titles centered, metadata bottom-right -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Perceived<br>Obsolescence</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">
+        <h2 class="hero-subtitle">The shelf life of<br>a garment</h2>
+      </div>
+      <div class="meta-block">
+        <span>Data visualization</span>
+        <span>Digital print on silk fabric maxi dress</span>
+        <span>2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO IMAGE (replace src with video tag when ready) -->
+  <img class="hero-image" src="Obsolescence5.png" alt="Perceived Obsolescence pattern" />
+
+  <!-- INFO -->
+  <section class="info">
+    <div class="section-label">Info</div>
+    <div class="info-col">
+      <p>Social media has fundamentally changed the relationship between people and their clothes.</p>
+      <p>Trend cycles that once lasted around 20 years have compressed to months, sometimes weeks. The pressure to stay current is constant, and it is manufactured. Platforms reward novelty and punish repetition, turning the wardrobe into something that is never quite finished, never quite right.</p>
+    </div>
+    <div class="info-col">
+      <p>The consequence is a specific kind of disposal. People are not discarding worn-out garments, they are discarding perfectly good ones. Not because the clothes have failed, but because they no longer feel current. 84% of shoppers made impulse purchases in 2023. New clothing purchases rose by 38% between 2020 and 2024. The cycle accelerates, and each acceleration makes the last purchase feel older, faster.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY ROW — 3 images, edge to edge -->
+  <section class="gallery-row">
+    <img src="Obsolescence4.png" alt="Model wearing the garment in studio" />
+    <img src="Obsolescence2.png" alt="Fabric close-up" />
+    <img src="Obsolescence1.png" alt="Model wearing the garment" />
+  </section>
+
+  <!-- PARAMETERS -->
+  <section class="params">
+    <div class="section-label">Parameters</div>
+    <div class="params-table">
+      <div class="param-row">
+        <span class="param-name">Rhythm</span>
+        <span class="param-value">20</span>
+        <span class="param-desc">A trend cycle used to last 20 years. That number sets the fundamental unit of the pattern's repeat, the baseline before everything accelerated.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Direction</span>
+        <span class="param-value">0.84</span>
+        <span class="param-desc">84% of shoppers made impulse purchases in 2023. The higher the value, the more the pattern leans in one direction, a single, overwhelming pull.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Variation</span>
+        <span class="param-value">0.38</span>
+        <span class="param-desc">New clothing purchases increased by 38% between 2020 and 2024. Variation introduces irregularity into the repeat. This mirrors a market that keeps expanding beyond any stable rhythm.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Folds</span>
+        <span class="param-value">0</span>
+        <span class="param-desc">No symmetry, no reflection, no order. The accelerated trend cycle has no structure. It simply moves, discards, and moves again.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Rotation</span>
+        <span class="param-value">3</span>
+        <span class="param-desc">Set to maximum. Mirroring the speed and instability of a system that reinvents itself every few weeks.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER GALLERY — 2 images, edge to edge -->
+  <section class="footer-gallery">
+    <img src="Obsolescence3.png" alt="Model wearing the garment outdoors" />
+    <img src="Obsolescence5.png" alt="Pattern flat" />
+  </section>
+
+  <!-- NAVIGATION -->
+  <div class="artwork-nav next-only">
+    <a href="generational.html" class="next">
+      <span class="nav-label">Next Artwork</span>
+      <span class="nav-title">Generational Transmission</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="page-footer">© 2026 AZCOITI</footer>
+
+</body>
+</html>

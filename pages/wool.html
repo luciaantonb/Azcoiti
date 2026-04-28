@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wool Production — Azcoiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="artwork-page.css" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <img class="logo"
+    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+    alt="Azcoiti" onclick="window.location.href='index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link" onclick="window.location.href='generator.html'">Generator</button>
+    <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="isotipo-04.png" alt="Isotype" />
+  </button>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = ['isotipo-04.png', 'isotipo-05.png', 'isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Wool<br>Production</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">
+        <h2 class="hero-subtitle">The time it takes to<br>do it right</h2>
+      </div>
+      <div class="meta-block">
+        <span>Data visualization</span>
+        <span>Woven fibres rug</span>
+        <span>2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO IMAGE (replace with video when ready) -->
+  <img class="hero-image" src="Wool6.png" alt="Wool Production pattern" />
+
+  <!-- INFO -->
+  <section class="info">
+    <div class="section-label">Info</div>
+    <div class="info-col">
+      <p>Most clothing is made fast. The entire supply chain of fast fashion is built around compression. Reducing the time between design and sale to days, and the time between purchase and disposal to weeks.</p>
+      <p>This piece is about the opposite. The full production cycle of a wool garment: shearing, scouring, carding, spinning, weaving, finishing. From sheep to finished garment, the process takes between six and twelve months. The sheep is shorn once a year. The fibre is processed by hand and machine across a chain that cannot be accelerated without compromising the material. A quality wool garment, made properly, can remain in active use for twenty to thirty years.</p>
+    </div>
+    <div class="info-col">
+      <p>Research into the environmental impact of wool production found that the number of times a garment is worn is the single most influential factor in determining its environmental footprint.</p>
+      <p>Wool garments stay in use longer than garments made from other fibres, and are more likely to be recycled. The slowness of the production process is not a flaw. It is the argument. This pattern encodes that slowness.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY ROW -->
+  <section class="gallery-row">
+    <img src="Wool1.png" alt="Rug with black chair and desk" />
+    <img src="Wool2.png" alt="Flat pattern detail" />
+    <img src="Wool3.png" alt="Rug with woven chair" />
+  </section>
+
+  <!-- PARAMETERS -->
+  <section class="params">
+    <div class="section-label">Parameters</div>
+    <div class="params-table">
+      <div class="param-row">
+        <span class="param-name">Rhythm</span>
+        <span class="param-value">7</span>
+        <span class="param-desc">The seven stages of wool production.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Direction</span>
+        <span class="param-value">0.12</span>
+        <span class="param-desc">The twelve months of the full production process.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Variation</span>
+        <span class="param-value">0.05</span>
+        <span class="param-desc">Very low. The artisanal process is consistent, repeatable, and human. It does not drift; it follows the same path every time, season after season.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Folds</span>
+        <span class="param-value">1</span>
+        <span class="param-desc">Shearing happens once a year. One fold, the most restrained structural choice in the series.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Rotation</span>
+        <span class="param-value">0</span>
+        <span class="param-desc">No rotation. The process has a clear, linear direction: from animal to fibre to fabric to garment. It does not turn back on itself.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER GALLERY -->
+  <section class="footer-gallery">
+    <img src="Wool4.png" alt="Rug standing upright in attic room" />
+    <img src="Wool5.png" alt="Flat pattern wide view" />
+  </section>
+
+  <!-- NAVIGATION -->
+  <div class="artwork-nav">
+    <a href="identity.html" class="prev">
+      <span class="nav-label">Previous Artwork</span>
+      <span class="nav-title">Identity and Personality</span>
+    </a>
+    <a href="industrial.html" class="next">
+      <span class="nav-label">Next Artwork</span>
+      <span class="nav-title">Industrial Production</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="page-footer">© 2026 AZCOITI</footer>
+
+</body>
+</html>
