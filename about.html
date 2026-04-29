@@ -223,6 +223,17 @@
     <button class="nav-icon" aria-label="Isotype">
     <img id="isotype-img" src="images/isotipo-04.png" alt="Isotype" />
   </button>
+  <script>
+    (function() {
+      var imgs = ['images/isotipo-04.png', 'images/isotipo-05.png', 'images/isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
   
   
 </header>

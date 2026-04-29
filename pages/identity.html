@@ -1,193 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Identity and Personality — Azcoiti</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../css/nav.css" />
-    <link rel="stylesheet" href="../css/artwork-page.css" />
-  </head>
-  <body>
-    <!-- ── HEADER ── -->
-    <header>
-      <img
-        class="logo"
-        src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
-        alt="Azcoiti"
-        onclick="window.location.href = '../index.html'"
-      />
-      <span class="nav-tagline">Pattern Creation</span>
-      <nav class="nav-links">
-        <button
-          class="nav-link"
-          onclick="window.location.href = '../generator.html'"
-        >
-          Generator
-        </button>
-        <button
-          class="nav-link active"
-          onclick="window.location.href = 'artwork.html'"
-        >
-          Artwork
-        </button>
-        <button
-          class="nav-link"
-          onclick="window.location.href = '../about.html'"
-        >
-          About
-        </button>
-      </nav>
-      <button class="nav-icon" aria-label="Isotype">
-        <img id="isotype-img" src="../images/isotipo-04.png" alt="Isotype" />
-      </button>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identity and Personality — Azcoiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/nav.css" />
+  <link rel="stylesheet" href="../css/artwork-page.css" />
+</head>
+<body>
 
-    <div class="page">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-left">
-          <h1 class="hero-title">Identity and<br />Personality</h1>
-        </div>
-        <div class="hero-right">
-          <div class="hero-right-top">
-            <h2 class="hero-subtitle">You are what<br />you wear</h2>
-          </div>
-          <div class="meta-block">
-            <span>Data visualization</span>
-            <span>Technical hooded windbreaker</span>
-            <span>2026</span>
-          </div>
-        </div>
-      </section>
+<!-- ── HEADER ── -->
+<header>
+  <img class="logo"
+    src="https://storage.googleapis.com/storage.magicpath.ai/user/397403131929063424/figma-assets/04da8ae3-0b31-45e3-a9e9-73b35570fb03.png"
+    alt="Azcoiti" onclick="window.location.href='../index.html'" />
+  <span class="nav-tagline">Pattern Creation</span>
+  <nav class="nav-links">
+    <button class="nav-link" onclick="window.location.href='../generator.html'">Generator</button>
+    <button class="nav-link active" onclick="window.location.href='artwork.html'">Artwork</button>
+    <button class="nav-link" onclick="window.location.href='../about.html'">About</button>
+  </nav>
+    <button class="nav-icon" aria-label="Isotype">
+    <img id="isotype-img" src="../images/isotipo-04.png" alt="Isotype" />
+  </button>
+  <script>
+    (function() {
+      var imgs = ['../images/isotipo-04.png', '../images/isotipo-05.png', '../images/isotipo-06.png'];
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % imgs.length;
+        var el = document.getElementById('isotype-img');
+        if (el) el.src = imgs[i];
+      }, 2000);
+    })();
+  </script>
+  
+  
+</header>
 
-      <!-- HERO IMAGE (replace with video when ready) -->
-      <img
-        class="hero-image"
-        src="../images/Identity6.png"
-        alt="Identity and Personality pattern"
-      />
+<div class="page">
 
-      <!-- INFO -->
-      <section class="info">
-        <div class="section-label">Info</div>
-        <div class="info-col">
-          <p>
-            Before clothing became a product, it was a language. The way people
-            dress is not simply a response to trends or temperature. It is one
-            of the most immediate ways a person expresses who they are, how they
-            feel, and how they want to move through the world.
-          </p>
-          <p>
-            A study of 792 women found that clothing choices reflect not just
-            how people want to be perceived, but how they feel about themselves.
-            People with greater openness to experience were 1.8 times more
-            likely to develop an urban, sophisticated personal style. Those
-            actively seeking individuality through clothing were 3.96 times more
-            likely to develop a recognisable style of their own. And so many
-            more variations.
-          </p>
-        </div>
-        <div class="info-col">
-          <p>
-            This is clothing working as it was always meant to. Not as a trend
-            object or a disposable purchase, but as something personal,
-            considered, and specific to the person wearing it.
-          </p>
-          <p>
-            This pattern encodes that specificity: high variation because
-            identity is individual, never uniform. The data here does not
-            describe a problem. It describes something worth protecting.
-          </p>
-        </div>
-      </section>
-
-      <!-- GALLERY ROW -->
-      <section class="gallery-row">
-        <img
-          src="../images/Identity1.png"
-          alt="Model wearing patterned jacket"
-        />
-        <img src="../images/Identity2.png" alt="Pattern flat detail" />
-        <img src="../images/Identity3.png" alt="Hood close-up detail" />
-      </section>
-
-      <!-- PARAMETERS -->
-      <section class="params">
-        <div class="section-label">Parameters</div>
-        <div class="params-table">
-          <div class="param-row">
-            <span class="param-name">Rhythm</span>
-            <span class="param-value">4</span>
-            <span class="param-desc"
-              >An approximation of 3.96: the multiplier showing how much more
-              likely people who seek individuality are to develop their own
-              style.</span
-            >
-          </div>
-          <div class="param-row">
-            <span class="param-name">Direction</span>
-            <span class="param-value">0.26</span>
-            <span class="param-desc"
-              >The average of 28.8% (comfort) and 23.5% (garment-person match),
-              normalised.</span
-            >
-          </div>
-          <div class="param-row">
-            <span class="param-name">Variation</span>
-            <span class="param-value">0.79</span>
-            <span class="param-desc"
-              >High variation. Identity is individual, never uniform. No two
-              people express themselves the same way, and the pattern reflects
-              that.</span
-            >
-          </div>
-          <div class="param-row">
-            <span class="param-name">Folds</span>
-            <span class="param-value">2</span>
-            <span class="param-desc"
-              >Bilateral symmetry: the interior and exterior self. How we see
-              ourselves and how we present ourselves, mirrored.</span
-            >
-          </div>
-          <div class="param-row">
-            <span class="param-name">Rotation</span>
-            <span class="param-value">1</span>
-            <span class="param-desc"
-              >Slight rotation. Identity evolves but does not reverse. A slow
-              turn, not a full inversion.</span
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER GALLERY -->
-      <section class="footer-gallery">
-        <img src="../images/Identity4.png" alt="Jacket detail and zipper" />
-        <img
-          src="../images/Identity5.png"
-          alt="Model on mountain wearing jacket"
-        />
-      </section>
-
-      <!-- NAVIGATION -->
-      <div class="artwork-nav">
-        <a href="generational.html" class="prev">
-          <span class="nav-label">Previous Artwork</span>
-          <span class="nav-title">Generational Transmission</span>
-        </a>
-        <a href="wool.html" class="next">
-          <span class="nav-label">Next Artwork</span>
-          <span class="nav-title">Wool Production</span>
-        </a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Identity and<br>Personality</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">
+        <h2 class="hero-subtitle">You are what<br>you wear</h2>
+      </div>
+      <div class="meta-block">
+        <span>Data visualization</span>
+        <span>3D motion artwork</span>
+        <span>2026</span>
       </div>
     </div>
+  </section>
 
-    <footer class="page-footer">© 2026 AZCOITI</footer>
-  </body>
+  <!-- HERO IMAGE (replace with video when ready) -->
+  <img class="hero-image" src="../images/Identity6.png" alt="Identity and Personality pattern" />
+
+  <!-- INFO -->
+  <section class="info">
+    <div class="section-label">Info</div>
+    <div class="info-col">
+      <p>Before clothing became a product, it was a language. The way people dress is not simply a response to trends or temperature. It is one of the most immediate ways a person expresses who they are, how they feel, and how they want to move through the world.</p>
+      <p>A study of 792 women found that clothing choices reflect not just how people want to be perceived, but how they feel about themselves. People with greater openness to experience were 1.8 times more likely to develop an urban, sophisticated personal style. Those actively seeking individuality through clothing were 3.96 times more likely to develop a recognisable style of their own. And so many more variations.</p>
+    </div>
+    <div class="info-col">
+      <p>This is clothing working as it was always meant to. Not as a trend object or a disposable purchase, but as something personal, considered, and specific to the person wearing it.</p>
+      <p>This pattern encodes that specificity: high variation because identity is individual, never uniform. The data here does not describe a problem. It describes something worth protecting.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY ROW -->
+  <section class="gallery-row">
+    <img src="../images/Identity1.png" alt="Model wearing patterned jacket" />
+    <img src="../images/Identity2.png" alt="Pattern flat detail" />
+    <img src="../images/Identity3.png" alt="Hood close-up detail" />
+  </section>
+
+  <!-- PARAMETERS -->
+  <section class="params">
+    <div class="section-label">Parameters</div>
+    <div class="params-table">
+      <div class="param-row">
+        <span class="param-name">Rhythm</span>
+        <span class="param-value">4</span>
+        <span class="param-desc">An approximation of 3.96: the multiplier showing how much more likely people who seek individuality are to develop their own style.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Direction</span>
+        <span class="param-value">0.26</span>
+        <span class="param-desc">The average of 28.8% (comfort) and 23.5% (garment-person match), normalised.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Variation</span>
+        <span class="param-value">0.79</span>
+        <span class="param-desc">High variation. Identity is individual, never uniform. No two people express themselves the same way, and the pattern reflects that.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Folds</span>
+        <span class="param-value">2</span>
+        <span class="param-desc">Bilateral symmetry: the interior and exterior self. How we see ourselves and how we present ourselves, mirrored.</span>
+      </div>
+      <div class="param-row">
+        <span class="param-name">Rotation</span>
+        <span class="param-value">1</span>
+        <span class="param-desc">Slight rotation. Identity evolves but does not reverse. A slow turn, not a full inversion.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER GALLERY -->
+  <section class="footer-gallery">
+    <img src="../images/Identity4.png" alt="Jacket detail and zipper" />
+    <img src="../images/Identity5.png" alt="Model on mountain wearing jacket" />
+  </section>
+
+  <!-- NAVIGATION -->
+  <div class="artwork-nav">
+    <a href="generational.html" class="prev">
+      <span class="nav-label">Previous Artwork</span>
+      <span class="nav-title">Generational Transmission</span>
+    </a>
+    <a href="wool.html" class="next">
+      <span class="nav-label">Next Artwork</span>
+      <span class="nav-title">Wool Production</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="page-footer">© 2026 AZCOITI</footer>
+
+</body>
 </html>
